@@ -2,7 +2,7 @@
 
 using namespace std;
 
-vector <int> burbuja(vector <int> cant, int longitud)
+int* burbuja(int* cant, int longitud)
 {
 	int r1 = 0;
 	//Ciclo para acomodar
@@ -24,7 +24,7 @@ int main()
 {
 	unsigned char valor;
 	unsigned int longi = 0;
-	vector <int> final;
+	int* final;
 
 	cout << "Ingresa 1 para iniciar" << endl;
 	cin >> valor;
@@ -33,15 +33,15 @@ int main()
 	{
 		cout << "Ingresa la longitud" << endl;
 		cin >> longi;
-		vector <int> datos(longi);
+		int* datos = new int[longi];
 		cout << "Ingresa los datos" << endl;
 		//Ciclo para ingresar datos
-		for (int i = 0; i < size(datos); i++)
+		for (int i = 0; i < longi; i++)
 		{
 			cin >> datos[i];
 		}
 		final = burbuja(datos, longi);
-		for (int i = 0; i < final.size(); i++)
+		for (int i = 0; i < longi; i++)
 		{
 			cout << final[i] << " ";
 		}
