@@ -2,106 +2,79 @@
 
 using namespace std;
 
-void quickS(int tamaño)
+//1
+void datos(int longi, int arreglo2[]) //Funcion para poder llenar el arreglo de datos 
 {
-	int uno = 0; int dos = 0; int contador = 0; int temp = 0; int menor = 0; int mayor = 0; int p = 0;
-	int* arreglo = new int[tamaño];
-	int* arregloMenor = new int[tamaño];
-	int* arregloMayor = new int[tamaño];
-	int i = 0; int j = tamaño - 1;
-	int pivote = (tamaño / 2) - 1;
-	
 	//Ciclo para ingresar los datos
-	cout << "Ingresa los datos" << endl;
-	for (int i = 0; i < tamaño; i++)
+	cout << "Ingresa los numeros" << endl;
+	for (int i = 0; i < longi; i++)
 	{
-		cin >> arreglo[i]; cin.clear();
+		cout << i + 1 << "...";
+		cin >> arreglo2[i];
 	}
-	pivote = arreglo[pivote];
-	//Ciclo de dos recorridos donde a la izquierda los menores y derecha mayore
-	while (contador < (tamaño / 2) + 1)//Ciclo de dos recorridos donde a la izquierda los menores y derecha mayore
+}
+
+//2
+void quickS(int arreglo[], int izquierda, int derecha) //Funcion de ordenamiento
+{
+	int i = izquierda; //Puntero inicial del lado menor
+	int j = derecha; //Puntero inicial del lado mayor
+	int temporal = 0; //Variable para almacenar un dato necesario a intercambiar
+	int pivote = arreglo[(izquierda + derecha) / 2]; //Pivote central
+
+	while (i <= j)
 	{
-		uno = arreglo[i];
-		dos = arreglo[j];
-		if ((uno < pivote == 0) && (dos > pivote == 0))//En el caso que se van a cambiar
-		{
-			temp = uno; uno = dos; dos = temp;
-			arreglo[i] = uno; arreglo[j] = dos;
-			i++; j--;
-		}
-		else if ((uno < pivote == 0) && (dos > pivote == 1))//En el caso donde el derecho es mayor
-		{
-			j--;
-		}
-		else if ((uno < pivote == 1) && (dos > pivote == 0))//En el caso donde el izquierdo si es menor
+		while ((arreglo[i] < pivote) && (j <= derecha)) //En caso de que el número menor este en su lugar
 		{
 			i++;
 		}
-		contador++;
-	}
-	for (int k = 0; k < tamaño; k++)
-	{
-		if (arreglo[k] < pivote)
+		while ((pivote < arreglo[j]) && (j > izquierda))  //En caso de que el número mayor este en su lugar
 		{
-			arregloMenor[k] = arreglo[k];
-			menor++;
+			j--;
 		}
-		else if (arreglo[k] > pivote)
+		if (i <= j) //Si los número no estan en su lugar, se moveran de menor a mmayor
 		{
-			arregloMayor[p] = arreglo[k];
-			mayor++;
-			p++;
+			temporal = arreglo[i];
+			arreglo[i] = arreglo[j];
+			arreglo[j] = temporal;
+			i++;
+			j--;
 		}
 	}
-	for (int a = 0; a < menor; a++)
+
+	if (izquierda < j)
 	{
-		for (int b = 0; b < menor - 1; b++)
-		{
-			if (arregloMenor[b] > arregloMenor[b + 1])
-			{
-				temp = arregloMenor[b];
-				arregloMenor[b] = arregloMenor[b + 1];
-				arregloMenor[b + 1] = temp;
-			}
-		}
+		quickS(arreglo, izquierda, j);
 	}
-	for (int a = 0; a < mayor; a++)
+	if (i < derecha)
 	{
-		for (int b = 0; b < mayor - 1; b++)
-		{
-			if (arregloMayor[b] > arregloMayor[b + 1])
-			{
-				temp = arregloMayor[b];
-				arregloMayor[b] = arregloMayor[b + 1];
-				arregloMayor[b + 1] = temp;
-			}
-		}
-	}
-	//Ciclo para imprimir
-	for (int i = 0; i < menor; i++)
-	{
-		cout << arregloMenor[i] << " ";
-	}
-	for (int j = 0; j < mayor; j++)
-	{
-		cout << arregloMayor[j] << " ";
+		quickS(arreglo, i, derecha);
 	}
 }
+
+//3
+void imprimirarreglo(int tamaño, int arreglo[]) //Función solo para imprimir el resultado final
+{
+	for (int i = 0; i < tamaño; i++)
+	{
+		cout << arreglo[i] << " ";
+	}
+	cout << '\n' <<"Terminado" << endl;
+}
+
 int main()
 {
-	unsigned char valor;
-	unsigned int tama = 0;
-	cout << "Ingresa 1 para inciar" << endl;
-	cin >> valor;
-	if (valor == '1')
-	{
-		cout << "Ingresa una longitud" << endl; cin >> tama;
-		quickS(tama);
-	}
-	else
-	{
-		exit(0);
-	}
+	int tamaño = 0;
+	int arreglo[255];
+
+	cout << "Bienvenido a Quicksort" << endl;
+	cout << "Ingresa una longitud" << endl;
+	cin >> tamaño;
+	//Inicio del envío y recibo de datos
+	datos(tamaño, arreglo); //1
+	quickS(arreglo, 0, tamaño - 1); //2
+	imprimirarreglo(tamaño, arreglo); //3
+
 	cin.get();
 	cin.ignore();
 	return 0;
