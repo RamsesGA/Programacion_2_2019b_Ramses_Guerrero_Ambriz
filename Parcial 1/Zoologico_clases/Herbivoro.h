@@ -1,9 +1,13 @@
 #pragma once
+#include "librerias.h"
+
+using namespace std;
 //Clase hija/madre
-class herbivoro : public caracteristicasAnimal
+class herbivoro : public animales
 {
-	public:
-		virtual void comer() = 0;
-		virtual void movimiento() = 0;
-		virtual void reproduccion() = 0;
+	protected:
+		herbivoro()
+		{
+			alimentacion = "Solo plantas";
+		}
 };

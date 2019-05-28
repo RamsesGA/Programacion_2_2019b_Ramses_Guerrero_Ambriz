@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
-
+#include <string>
+#include <vector>
 //Clase padre
 #include "Animales.h"
 //Clases hija/madre
