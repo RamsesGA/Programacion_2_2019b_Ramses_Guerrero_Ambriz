@@ -12,12 +12,12 @@ enum HEALTH
 class animales
 {
 	protected:
-		string alimentacion;
 		char age;
 		HEALTH health;
-	public:
+		string alimentacion;
 		string nombre;
-		//Funciones básicas para vivir
+	public:
+		//Funciones virtuales a heredar
 		virtual void comer() = 0;
 		virtual void movimiento() = 0;
 		virtual void reproduccion() = 0;
@@ -34,5 +34,16 @@ class animales
 		bool operator == (string &s)
 		{
 			return nombre == s;
+		}
+
+		//Mandando el dato a la funcion main
+		string _Nombre()
+		{
+			return nombre;
+		}
+
+		char _Edad()
+		{
+			return age;
 		}
 };

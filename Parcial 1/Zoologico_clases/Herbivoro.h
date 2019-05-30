@@ -2,6 +2,7 @@
 #include "librerias.h"
 
 using namespace std;
+
 //Clase hija/madre
 class herbivoro : public animales
 {

@@ -12,11 +12,11 @@ void quickS(vector <animales*> &NombresAnimales, int izquierda, int derecha) //F
 	//pivote++;
 	while (i <= j)
 	{
-		while ((NombresAnimales[i]->nombre < NombresAnimales[pivote]->nombre) && (j <= derecha)) //En caso de que el número menor este en su lugar
+		while ((NombresAnimales[i]->_Nombre() < NombresAnimales[pivote]->_Nombre()) && (j <= derecha)) //En caso de que el número menor este en su lugar
 		{
 			i++;
 		}
-		while ((NombresAnimales[pivote]->nombre < NombresAnimales[j]->nombre) && (j > izquierda))  //En caso de que el número mayor este en su lugar
+		while ((NombresAnimales[pivote]->_Nombre() < NombresAnimales[j]->_Nombre()) && (j > izquierda))  //En caso de que el número mayor este en su lugar
 		{
 			j--;
 		}
@@ -45,7 +45,7 @@ void imprimirarreglo(int tamaño, vector <animales*> &NombresAnimales) //Función 
 {
 	for (int i = 0; i < tamaño; i++)
 	{
-		cout << NombresAnimales[i]->nombre << " ";
+		cout << NombresAnimales[i]->_Nombre() << " ";
 	}
 	cout << '\n' << "Terminado" << endl;
 }
@@ -64,17 +64,17 @@ int busquedaBinaria(string dato, vector <animales*> &NombresAnimales)
 	{
 		mitad = (inf + sup) / 2;
 
-		if (NombresAnimales[mitad]->nombre == dato)
+		if (NombresAnimales[mitad]->_Nombre() == dato)
 		{
 			bandera = true;
 			break;
 		}
-		if (NombresAnimales[mitad]->nombre > dato)
+		if (NombresAnimales[mitad]->_Nombre() > dato)
 		{
 			sup = mitad - 1;
 			mitad = (inf + sup) / 2;
 		}
-		if (NombresAnimales[mitad]->nombre < dato)
+		if (NombresAnimales[mitad]->_Nombre() < dato)
 		{
 			inf = mitad + 1;
 			mitad = (inf + sup) / 2;
@@ -90,10 +90,10 @@ int busquedaBinaria(string dato, vector <animales*> &NombresAnimales)
 int main()
 {
 	//Variables Omnivoros
-	Avestruz animal1("Manuel"); //1
-	OsoPardo animal2("Po"); //3
-	Erizo animal3("Sonic");//4
-	PezPayaso animal4("Nemo"); //2
+	Avestruz animal1("Manuel");
+	OsoPardo animal2("Po");
+	Erizo animal3("Sonic");
+	PezPayaso animal4("Nemo");
 	//Varibales Carnivoros
 	Leon animal5("Mufasa");
 	Cocodrilo animal6("Anaki");
@@ -137,11 +137,16 @@ int main()
 	//Variables para la busqueda binaria
 	string posibleDato;
 	int recibir;
+	vector <animales> allNames;
 
-	cout << "Ingresa la inicial de un nombre" << endl;
+	//Buscar el nombre del animal
+	cout << "Ingresa el nombre posible de un animal" << endl;
 	cin >> posibleDato;
+	//Uuna variable de tipo entero va a tomar la posicion del dato en caso de que exista
 	recibir = busquedaBinaria(posibleDato, NombresAnimalesO);
+	//Al final se imprime
 	cout << "Se encuentra en la posicion" << recibir << endl;
+
 	cin.get();
 	cin.ignore();
 	return 0;
