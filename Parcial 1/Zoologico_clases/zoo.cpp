@@ -2,29 +2,33 @@
 
 using namespace std;
 
-//1- Funcion del metodo de ordenamiento quicksort
-void quickS(vector <animales*> &NombresAnimales, int izquierda, int derecha) //Funcion de ordenamiento
+//1. Funcion del metodo de ordenamiento quicksort solo para nombres
+void quickS_Nombres(vector <animales*> &AnimalesCompletosQS, int izquierda, int derecha) //Funcion de ordenamiento
 {
 	int i = izquierda; //Puntero inicial del lado menor
 	int j = derecha; //Puntero inicial del lado mayor
 	animales* temporal; //Variable para almacenar un dato necesario a intercambiar
 	int pivote = (izquierda + derecha) / 2; //Pivote central
-	//pivote++;
+
 	while (i <= j)
 	{
-		while ((NombresAnimales[i]->_Nombre() < NombresAnimales[pivote]->_Nombre()) && (j <= derecha)) //En caso de que el número menor este en su lugar
+		//En caso de que el número menor este en su lugar
+		while ((AnimalesCompletosQS[i]->_Nombre() < AnimalesCompletosQS[pivote]->_Nombre()) && (j <= derecha))
 		{
 			i++;
 		}
-		while ((NombresAnimales[pivote]->_Nombre() < NombresAnimales[j]->_Nombre()) && (j > izquierda))  //En caso de que el número mayor este en su lugar
+		//En caso de que el número mayor este en su lugar
+		while ((AnimalesCompletosQS[pivote]->_Nombre() < AnimalesCompletosQS[j]->_Nombre()) && (j > izquierda))
 		{
 			j--;
 		}
-		if (i <= j) //Si los número no estan en su lugar, se moveran de menor a mmayor
+
+		//Si los número no estan en su lugar, se moveran de menor a mayor
+		if (i <= j)
 		{
-			temporal = NombresAnimales[i];
-			NombresAnimales[i] = NombresAnimales[j];
-			NombresAnimales[j] = temporal;
+			temporal = AnimalesCompletosQS[i];
+			AnimalesCompletosQS[i] = AnimalesCompletosQS[j];
+			AnimalesCompletosQS[j] = temporal;
 			i++;
 			j--;
 		}
@@ -32,120 +36,307 @@ void quickS(vector <animales*> &NombresAnimales, int izquierda, int derecha) //F
 
 	if (izquierda < j)
 	{
-		quickS(NombresAnimales, izquierda, j);
+		quickS_Nombres(AnimalesCompletosQS, izquierda, j);
 	}
 	if (i < derecha)
 	{
-		quickS(NombresAnimales, i, derecha);
+		quickS_Nombres(AnimalesCompletosQS, i, derecha);
 	}
 }
-
-//2- Funcion para imprimir la lista ordenada de forma ascendente
-void imprimirarreglo(int tamaño, vector <animales*> &NombresAnimales) //Función solo para imprimir el resultado final
+//1.Funcion para imprimir la lista ordenada de forma ascendente solo nombres
+void imprimirarreglo_Nombre(int tamaño, vector <animales*> &AnimalesCompletosPRINT) //Función solo para imprimir el resultado final
 {
+	cout << "-----Ordenamiento por nombres-----" << endl;
 	for (int i = 0; i < tamaño; i++)
 	{
-		cout << NombresAnimales[i]->_Nombre() << " ";
+		cout << "Nombre: " << AnimalesCompletosPRINT[i]->_Nombre() << " ~ Posicion: " << i << endl;
 	}
-	cout << '\n' << "Terminado" << endl;
+	cout << "\nTerminado" << endl;
 }
-
-//3- Busqueda binaria
-int busquedaBinaria(string dato, vector <animales*> &NombresAnimales)
+//1.- Busqueda binaria del nombre
+int busquedaBinaria(string dato, vector <animales*> &AnimalesCompletosBUSQUEDA)
 {
 	int inf = 0; int sup = 0; int mitad = 0; int datos = 0;
-	char bandera = false;
 
 
 	inf = 0;
-	sup = NombresAnimales.size() - 1;
+	sup = AnimalesCompletosBUSQUEDA.size() - 1;
 
 	while (inf <= sup)
 	{
 		mitad = (inf + sup) / 2;
 
-		if (NombresAnimales[mitad]->_Nombre() == dato)
+		if (AnimalesCompletosBUSQUEDA[mitad]->_Nombre() == dato)
 		{
-			bandera = true;
+			return mitad;
 			break;
 		}
-		if (NombresAnimales[mitad]->_Nombre() > dato)
+		if (AnimalesCompletosBUSQUEDA[mitad]->_Nombre() > dato)
 		{
 			sup = mitad - 1;
 			mitad = (inf + sup) / 2;
 		}
-		if (NombresAnimales[mitad]->_Nombre() < dato)
+		if (AnimalesCompletosBUSQUEDA[mitad]->_Nombre() < dato)
 		{
 			inf = mitad + 1;
 			mitad = (inf + sup) / 2;
 		}
 	}
-	if (bandera == true)
+}
+
+
+//2.Funcion del metodo de ordenamiento quicksort solo para edades
+void quickS_Edades(vector <animales*> &AnimalesCompletosQS, int izquierda, int derecha) //Funcion de ordenamiento
+{
+	int i = izquierda; //Puntero inicial del lado menor
+	int j = derecha; //Puntero inicial del lado mayor
+	animales* temporal; //Variable para almacenar un dato necesario a intercambiar
+	int pivote = (izquierda + derecha) / 2; //Pivote central
+
+	while (i <= j)
 	{
-		return mitad;
+		//En caso de que el número menor este en su lugar
+		while ((AnimalesCompletosQS[i]->_Edad() < AnimalesCompletosQS[pivote]->_Edad()) && (j <= derecha))
+		{
+			i++;
+		}
+		//En caso de que el número mayor este en su lugar
+		while ((AnimalesCompletosQS[pivote]->_Edad() < AnimalesCompletosQS[j]->_Edad()) && (j > izquierda))
+		{
+			j--;
+		}
+
+		//Si los número no estan en su lugar, se moveran de menor a mayor
+		if (i <= j)
+		{
+			temporal = AnimalesCompletosQS[i];
+			AnimalesCompletosQS[i] = AnimalesCompletosQS[j];
+			AnimalesCompletosQS[j] = temporal;
+			i++;
+			j--;
+		}
+	}
+
+	if (izquierda < j)
+	{
+		quickS_Edades(AnimalesCompletosQS, izquierda, j);
+	}
+	if (i < derecha)
+	{
+		quickS_Edades(AnimalesCompletosQS, i, derecha);
+	}
+}
+//2.Funcion para imprimir la lista ordenada de forma ascendente
+void imprimirarreglo_Edades(int tamaño, vector <animales*> &AnimalesCompletosPRINT) //Función solo para imprimir el resultado final
+{
+	cout << "\n-----Ordenamiento por edades-----" << endl;
+	for (int i = 0; i < tamaño; i++)
+	{
+		cout << "Edad: " << AnimalesCompletosPRINT[i]->_Edad() << "  ~ Posicion: " << i << endl;
+	}
+	cout << "\nTerminado" << endl;
+}
+//2.- Busqueda binaria de la edad
+int busquedaBinaria(unsigned char dato, vector <animales*> &AnimalesCompletosBUSQUEDA)
+{
+	int inf = 0; int sup = 0; int mitad = 0; int datos = 0;
+
+	inf = 0;
+	sup = AnimalesCompletosBUSQUEDA.size() - 1;
+
+	while (inf <= sup)
+	{
+		mitad = (inf + sup) / 2;
+
+		if (AnimalesCompletosBUSQUEDA[mitad]->_Edad() == dato)
+		{
+			return mitad;
+			break;
+		}
+		if (AnimalesCompletosBUSQUEDA[mitad]->_Edad() > dato)
+		{
+			sup = mitad - 1;
+			mitad = (inf + sup) / 2;
+		}
+		if (AnimalesCompletosBUSQUEDA[mitad]->_Edad() < dato)
+		{
+			inf = mitad + 1;
+			mitad = (inf + sup) / 2;
+		}
 	}
 }
 
-//0- Funcion principal del código
+
+//3.Funcion del metodo de ordenamiento quicksort solo para HEALTH
+void quickS_Health(vector <animales*> &AnimalesCompletosQS, int izquierda, int derecha) //Funcion de ordenamiento
+{
+	int i = izquierda; //Puntero inicial del lado menor
+	int j = derecha; //Puntero inicial del lado mayor
+	animales* temporal; //Variable para almacenar un dato necesario a intercambiar
+	int pivote = (izquierda + derecha) / 2; //Pivote central
+
+	while (i <= j)
+	{
+		//En caso de que el número menor este en su lugar
+		while ((AnimalesCompletosQS[i]->_Salud() < AnimalesCompletosQS[pivote]->_Salud()) && (j <= derecha))
+		{
+			i++;
+		}
+		//En caso de que el número mayor este en su lugar
+		while ((AnimalesCompletosQS[pivote]->_Salud() < AnimalesCompletosQS[j]->_Salud()) && (j > izquierda))
+		{
+			j--;
+		}
+
+		//Si los número no estan en su lugar, se moveran de menor a mayor
+		if (i <= j)
+		{
+			temporal = AnimalesCompletosQS[i];
+			AnimalesCompletosQS[i] = AnimalesCompletosQS[j];
+			AnimalesCompletosQS[j] = temporal;
+			i++;
+			j--;
+		}
+	}
+
+	if (izquierda < j)
+	{
+		quickS_Health(AnimalesCompletosQS, izquierda, j);
+	}
+	if (i < derecha)
+	{
+		quickS_Health(AnimalesCompletosQS, i, derecha);
+	}
+}
+//3.Funcion para imprimir la lista ordenada de forma ascendente
+void imprimirarreglo_Health(int tamaño, vector <animales*> &AnimalesCompletosPRINT) //Función solo para imprimir el resultado final
+{
+	cout << "\n-----Ordenamiento por HEALTH-----" << endl;
+	for (int i = 0; i < tamaño; i++)
+	{
+		cout << "Salud: " << AnimalesCompletosPRINT[i]->_Salud() << "  ~ Posicion: " << i << endl;
+	}
+	cout << "\nTerminado" << endl;
+}
+//3.- Busqueda binaria de HEALTH
+int busquedaBinaria_Health(unsigned int dato, vector <animales*> &AnimalesCompletosBUSQUEDA)
+{
+	int inf = 0; int sup = 0; int mitad = 0; int datos = 0;
+
+	inf = 0;
+	sup = AnimalesCompletosBUSQUEDA.size() - 1;
+
+	while (inf <= sup)
+	{
+		mitad = (inf + sup) / 2;
+
+		if (AnimalesCompletosBUSQUEDA[mitad]->_Salud() == dato)
+		{
+			return mitad;
+			break;
+		}
+		if (AnimalesCompletosBUSQUEDA[mitad]->_Salud() > dato)
+		{
+			sup = mitad - 1;
+			mitad = (inf + sup) / 2;
+		}
+		if (AnimalesCompletosBUSQUEDA[mitad]->_Salud() < dato)
+		{
+			inf = mitad + 1;
+			mitad = (inf + sup) / 2;
+		}
+	}
+}
+
+//Funcion principal del código
 int main()
 {
+	//Variables para la busqueda binaria
+	string posibleNombre;
+	unsigned char posibleEdad;
+	unsigned int posibleHealth;
+	int recibir = 0;
+	vector <animales> allNames;
+	//Vector que almacena todos los datos de los Omnivoros
+	vector <animales*> _animalesCompletos;
+
+	//En general, todo esto es para enviar un nombre a cada animal y edad
 	//Variables Omnivoros
-	Avestruz animal1("Manuel");
-	OsoPardo animal2("Po");
-	Erizo animal3("Sonic");
-	PezPayaso animal4("Nemo");
+	Avestruz animal1("manuel", '1', bad);
+	OsoPardo animal2("po", '1', critical);
+	Erizo animal3("sonic", '5', good);
+	PezPayaso animal4("nemo", '2', bad);
 	//Varibales Carnivoros
-	Leon animal5("Mufasa");
-	Cocodrilo animal6("Anaki");
-	OsoPolar animal7("Zhifu");
-	Delfin animal8("Kikiri");
-	Tiburon animal9("Emudi");
-	Pulpo animal10("Monica");
+	Leon animal5("mufasa", '4', bad);
+	Cocodrilo animal6("anaki", '3', good);
+	OsoPolar animal7("zhifu", '6', bad);
+	Delfin animal8("kikiri", '7', good);
+	Tiburon animal9("emudi", '9', critical);
+	Pulpo animal10("monica", '5', critical);
 	//Variables Herbivoros
-	Vaca animal11("Bonifacio");
-	Oruga animal12("Punto");
-	Cabra animal13("Chupador");
-	Oveja animal14("Mikasa");
-	Iguana animal15("Orumaito");
-	//Vector que almacena todos los nombres de los Omnivoros
-	vector <animales*> NombresAnimalesO;
-	//Todos los omnivoros
-	NombresAnimalesO.push_back(&animal1);
-	NombresAnimalesO.push_back(&animal2);
-	NombresAnimalesO.push_back(&animal3);
-	NombresAnimalesO.push_back(&animal4);
-	//Todos los carnivoros
-	NombresAnimalesO.push_back(&animal5);
-	NombresAnimalesO.push_back(&animal6);
-	NombresAnimalesO.push_back(&animal7);
-	NombresAnimalesO.push_back(&animal8);
-	NombresAnimalesO.push_back(&animal9);
-	NombresAnimalesO.push_back(&animal10);
-	//Todos los herbivoros
-	NombresAnimalesO.push_back(&animal11);
-	NombresAnimalesO.push_back(&animal12);
-	NombresAnimalesO.push_back(&animal13);
-	NombresAnimalesO.push_back(&animal14);
-	NombresAnimalesO.push_back(&animal15);
+	Vaca animal11("bonifacio", '8', good);
+	Oruga animal12("punto", '9', critical);
+	Cabra animal13("chupador", '6', bad);
+	Oveja animal14("mikasa", '8', critical);
+	Iguana animal15("orumaito", '3', good);
+	//--------------------------
+
+	//Todos los omnivoros por nombre
+	_animalesCompletos.push_back(&animal1);
+	_animalesCompletos.push_back(&animal2);
+	_animalesCompletos.push_back(&animal3);
+	_animalesCompletos.push_back(&animal4);
+
+	//Todos los carnivoros por nombre
+	_animalesCompletos.push_back(&animal5);
+	_animalesCompletos.push_back(&animal6);
+	_animalesCompletos.push_back(&animal7);
+	_animalesCompletos.push_back(&animal8);
+	_animalesCompletos.push_back(&animal9);
+	_animalesCompletos.push_back(&animal10);
+
+	//Todos los herbivoros por nombre
+	_animalesCompletos.push_back(&animal11);
+	_animalesCompletos.push_back(&animal12);
+	_animalesCompletos.push_back(&animal13);
+	_animalesCompletos.push_back(&animal14);
+	_animalesCompletos.push_back(&animal15);
 
 	//1- Se manda a llamar y se envía los datos desordenados al quicksort
-	quickS(NombresAnimalesO, 0, NombresAnimalesO.size() - 1); 
-	//2- Funcion para mandar a llamar y que imprima los datos ordenados para verificar si es correcto
-	imprimirarreglo(NombresAnimalesO.size(), NombresAnimalesO); 
-	//3- Funcion para mandar a llamar el metodo de busqueda binario y ver si se encuentra tal letra principal
-
-	//Variables para la busqueda binaria
-	string posibleDato;
-	int recibir;
-	vector <animales> allNames;
-
-	//Buscar el nombre del animal
+	quickS_Nombres(_animalesCompletos, 0, _animalesCompletos.size() - 1);
+	//1- Funcion para mandar a llamar y que imprima los datos ordenados para verificar si es correcto
+	imprimirarreglo_Nombre(_animalesCompletos.size(), _animalesCompletos);
+	//1. Buscar el nombre del animal
 	cout << "Ingresa el nombre posible de un animal" << endl;
-	cin >> posibleDato;
-	//Uuna variable de tipo entero va a tomar la posicion del dato en caso de que exista
-	recibir = busquedaBinaria(posibleDato, NombresAnimalesO);
-	//Al final se imprime
-	cout << "Se encuentra en la posicion" << recibir << endl;
+	cin >> posibleNombre;
+	//1.Una variable de tipo entero va a tomar la posicion del dato en caso de que exista
+	recibir = busquedaBinaria(posibleNombre, _animalesCompletos);
+	//1.Al final se imprime
+	cout << "Se encuentra en la posicion: " << recibir << endl;
+
+	//---------------------------------------2.
+	quickS_Edades(_animalesCompletos, 0, _animalesCompletos.size() - 1);
+	//2.
+	imprimirarreglo_Edades(_animalesCompletos.size(), _animalesCompletos);
+	//2. Buscar la edad del animal
+	cout << "Ingresa la edad posible de un animal" << endl;
+	cin >> posibleEdad;
+	//2.Una variable de tipo entero va a tomar la posicion del dato en caso de que exista
+	recibir = busquedaBinaria(posibleEdad, _animalesCompletos);
+	//2.Al final se imprime
+	cout << "Se encuentra en la posicion: " << recibir << endl;
+
+	//--------------------------------------3.
+	quickS_Health(_animalesCompletos, 0, _animalesCompletos.size() - 1);
+	//3.
+	imprimirarreglo_Health(_animalesCompletos.size(), _animalesCompletos);
+	//3. Buscar la edad del animal
+	cout << "Ingresa la salud de un animal" << endl;
+	cin >> posibleHealth;
+	//3.Una variable de tipo entero va a tomar la posicion del dato en caso de que exista
+	recibir = busquedaBinaria_Health(posibleHealth, _animalesCompletos);
+	//3.Al final se imprime
+	cout << "Se encuentra en la posicion: " << recibir << endl;
 
 	cin.get();
 	cin.ignore();

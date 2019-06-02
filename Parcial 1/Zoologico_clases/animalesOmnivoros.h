@@ -9,16 +9,15 @@ class Avestruz : public omnivoro
 	public:
 		//Constructor general
 		Avestruz() {};
-		//Constructor con definicion de nombre desde main
-		Avestruz(string name)
+		
+		//Constructor
+		Avestruz(string name, char _age, HEALTH _dato)
 		{
 			nombre = name;
-		}
-		//Constructor de edad, los datos estan en zoo.cpp main
-		Avestruz(char _age)
-		{
 			age = _age;
+			health = _dato;
 		}
+
 		//Funciones heredadas desde animales.h
 		void comer() { cout << "Esta ave puede consumir entre carne, ocacionalmente carroña y plantas"; };
 		void movimiento() { cout << "Son terrestres y usan dos patas para moverse"; };
@@ -30,16 +29,15 @@ class OsoPardo : public omnivoro
 	public:
 		//Constructor general
 		OsoPardo(){}
-		//Constructor con definicion de nombre desde main
-		OsoPardo(string name)
+
+		//Constructor
+		OsoPardo(string name, char _age, HEALTH _dato)
 		{
 			nombre = name;
-		}
-		//Constructor de edad, los datos estan en zoo.cpp main
-		OsoPardo(char _age)
-		{
 			age = _age;
+			health = _dato;
 		}
+
 		//Funciones heredadas desde animales.h
 		void comer() { cout << "Este oso consume vegetacion, frutas y animales"; };
 		void movimiento() { cout << "Son terrestres y usan cuatro patas para moverse, tambien pueden nadar"; };
@@ -51,16 +49,15 @@ class Erizo : public omnivoro
 	public:
 		//Constructor general
 		Erizo(){}
-		//Constructor con definicion de nombre desde main
-		Erizo(string name)
+
+		//Constructor
+		Erizo(string name, char _age, HEALTH _dato)
 		{
 			nombre = name;
-		}
-		//Constructor de edad, los datos estan en zoo.cpp main
-		Erizo(char _age)
-		{
 			age = _age;
+			health = _dato;
 		}
+
 		//Funciones heredadas desde animales.h
 		void comer() { cout << "Se alimentan de insectos, frutas y vegetales"; };
 		void movimiento() { cout << "Son terrestres y usan cuatro patitas para moverse"; };
@@ -72,16 +69,15 @@ class PezPayaso : public omnivoro
 	public:
 		//Constructor general
 		PezPayaso(){}
-		//Constructor con definicion de nombre desde main
-		PezPayaso(string name)
+
+		//Constructor
+		PezPayaso(string name, char _age, HEALTH _dato)
 		{
 			nombre = name;
-		}
-		//Constructor de edad, los datos estan en zoo.cpp main
-		PezPayaso(char _age)
-		{
 			age = _age;
+			health = _dato;
 		}
+
 		//Funciones heredadas desde animales.h
 		void comer() { cout << "Se alimentan de la anemona, moluscos, parasitos, entre otros"; };
 		void movimiento() { cout << "Son acuaticos y usan una aletita para nadar"; };

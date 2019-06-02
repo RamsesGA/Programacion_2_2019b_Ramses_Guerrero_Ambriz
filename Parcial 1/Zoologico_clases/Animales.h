@@ -5,7 +5,7 @@ using namespace std;
 
 enum HEALTH
 {
-	good, bad, critical
+	good = 10, bad = 5, critical = 1
 };
 
 //Clase padre
@@ -41,9 +41,12 @@ class animales
 		{
 			return nombre;
 		}
-
 		char _Edad()
 		{
 			return age;
+		}
+		HEALTH _Salud()
+		{
+			return health;
 		}
 };
