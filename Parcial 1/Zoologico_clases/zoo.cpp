@@ -48,8 +48,8 @@ void imprimirarreglo_Nombre(int tamaño, vector <animales*> &AnimalesCompletosPRI
 {
 	cout << "-----Ordenamiento por nombres-----" << endl;
 	for (int i = 0; i < tamaño; i++)
-	{
-		cout << "Nombre: " << AnimalesCompletosPRINT[i]->_Nombre() << " ~ Posicion: " << i << endl;
+	{ 
+		cout << "Nombre: " << AnimalesCompletosPRINT[i]->_Nombre() << " Edad: " << AnimalesCompletosPRINT[i]->_Edad() << " Salud: " << AnimalesCompletosPRINT[i]->_Salud() << " ~ Posicion: " << i << endl;
 	}
 	cout << "\nTerminado" << endl;
 }
@@ -132,7 +132,7 @@ void imprimirarreglo_Edades(int tamaño, vector <animales*> &AnimalesCompletosPRI
 	cout << "\n-----Ordenamiento por edades-----" << endl;
 	for (int i = 0; i < tamaño; i++)
 	{
-		cout << "Edad: " << AnimalesCompletosPRINT[i]->_Edad() << "  ~ Posicion: " << i << endl;
+		cout << "Edad: " << AnimalesCompletosPRINT[i]->_Edad() << " Salud: " << AnimalesCompletosPRINT[i]->_Salud() << " Nombre: " << AnimalesCompletosPRINT[i]->_Nombre() << "  ~ Posicion: " << i << endl;
 	}
 	cout << "\nTerminado" << endl;
 }
@@ -214,7 +214,7 @@ void imprimirarreglo_Health(int tamaño, vector <animales*> &AnimalesCompletosPRI
 	cout << "\n-----Ordenamiento por HEALTH-----" << endl;
 	for (int i = 0; i < tamaño; i++)
 	{
-		cout << "Salud: " << AnimalesCompletosPRINT[i]->_Salud() << "  ~ Posicion: " << i << endl;
+		cout << "Salud: " << AnimalesCompletosPRINT[i]->_Salud() << " Edad: " << AnimalesCompletosPRINT[i]->_Edad() << " Nombre: " << AnimalesCompletosPRINT[i]->_Nombre() << "  ~ Posicion: " << i << endl;
 	}
 	cout << "\nTerminado" << endl;
 }
@@ -251,6 +251,7 @@ int busquedaBinaria_Health(unsigned int dato, vector <animales*> &AnimalesComple
 //Funcion principal del código
 int main()
 {
+	unsigned char seleccion = 0;
 	//Variables para la busqueda binaria
 	string posibleNombre;
 	unsigned char posibleEdad;
@@ -264,7 +265,7 @@ int main()
 	//Variables Omnivoros
 	Avestruz animal1("manuel", '1', bad);
 	OsoPardo animal2("po", '1', critical);
-	Erizo animal3("sonic", '5', good);
+	Erizo animal3("sonic", '4', good);
 	PezPayaso animal4("nemo", '2', bad);
 	//Varibales Carnivoros
 	Leon animal5("mufasa", '4', bad);
@@ -272,7 +273,7 @@ int main()
 	OsoPolar animal7("zhifu", '6', bad);
 	Delfin animal8("kikiri", '7', good);
 	Tiburon animal9("emudi", '9', critical);
-	Pulpo animal10("monica", '5', critical);
+	Pulpo animal10("monica", '9', critical);
 	//Variables Herbivoros
 	Vaca animal11("bonifacio", '8', good);
 	Oruga animal12("punto", '9', critical);
@@ -302,41 +303,56 @@ int main()
 	_animalesCompletos.push_back(&animal14);
 	_animalesCompletos.push_back(&animal15);
 
-	//1- Se manda a llamar y se envía los datos desordenados al quicksort
-	quickS_Nombres(_animalesCompletos, 0, _animalesCompletos.size() - 1);
-	//1- Funcion para mandar a llamar y que imprima los datos ordenados para verificar si es correcto
-	imprimirarreglo_Nombre(_animalesCompletos.size(), _animalesCompletos);
-	//1. Buscar el nombre del animal
-	cout << "Ingresa el nombre posible de un animal" << endl;
-	cin >> posibleNombre;
-	//1.Una variable de tipo entero va a tomar la posicion del dato en caso de que exista
-	recibir = busquedaBinaria(posibleNombre, _animalesCompletos);
-	//1.Al final se imprime
-	cout << "Se encuentra en la posicion: " << recibir << endl;
+	//Parte para la selección de ordenamiento
+	cout << "Selecciona el metodo a ordenar\n 1-Nombre\n 2-Edad\n 3-Salud" << endl;
+	cin >> seleccion;
 
-	//---------------------------------------2.
-	quickS_Edades(_animalesCompletos, 0, _animalesCompletos.size() - 1);
-	//2.
-	imprimirarreglo_Edades(_animalesCompletos.size(), _animalesCompletos);
-	//2. Buscar la edad del animal
-	cout << "Ingresa la edad posible de un animal" << endl;
-	cin >> posibleEdad;
-	//2.Una variable de tipo entero va a tomar la posicion del dato en caso de que exista
-	recibir = busquedaBinaria(posibleEdad, _animalesCompletos);
-	//2.Al final se imprime
-	cout << "Se encuentra en la posicion: " << recibir << endl;
-
-	//--------------------------------------3.
-	quickS_Health(_animalesCompletos, 0, _animalesCompletos.size() - 1);
-	//3.
-	imprimirarreglo_Health(_animalesCompletos.size(), _animalesCompletos);
-	//3. Buscar la edad del animal
-	cout << "Ingresa la salud de un animal" << endl;
-	cin >> posibleHealth;
-	//3.Una variable de tipo entero va a tomar la posicion del dato en caso de que exista
-	recibir = busquedaBinaria_Health(posibleHealth, _animalesCompletos);
-	//3.Al final se imprime
-	cout << "Se encuentra en la posicion: " << recibir << endl;
+	if (seleccion == '1')
+	{	
+		//Nombres------------------------------------------------------1
+		//1- Se manda a llamar y se envía los datos desordenados al quicksort
+		quickS_Nombres(_animalesCompletos, 0, _animalesCompletos.size() - 1);
+		//Ordenamiento nombres
+		//1- Funcion para mandar a llamar y que imprima los datos ordenados para verificar si es correcto
+		imprimirarreglo_Nombre(_animalesCompletos.size(), _animalesCompletos);
+		//1. Buscar el nombre del animal
+		cout << "Ingresa el nombre posible de un animal" << endl;
+		cin >> posibleNombre;
+		//1.Una variable de tipo entero va a tomar la posicion del dato en caso de que exista
+		recibir = busquedaBinaria(posibleNombre, _animalesCompletos);
+		//1.Al final se imprime
+		cout << "Se encuentra en la posicion: " << recibir << endl;
+	}
+	if (seleccion == '2')
+	{
+		//EDADES---------------------------------------2.
+		quickS_Edades(_animalesCompletos, 0, _animalesCompletos.size() - 1);
+		//Ordenamiento edad
+		//2.
+		imprimirarreglo_Edades(_animalesCompletos.size(), _animalesCompletos);
+		//2. Buscar la edad del animal
+		cout << "Ingresa la edad posible de un animal" << endl;
+		cin >> posibleEdad;
+		//2.Una variable de tipo entero va a tomar la posicion del dato en caso de que exista
+		recibir = busquedaBinaria(posibleEdad, _animalesCompletos);
+		//2.Al final se imprime
+		cout << "Se encuentra en la posicion: " << recibir << endl;
+	}
+	if (seleccion == '3')
+	{
+		//SALUD--------------------------------------3 .
+		quickS_Health(_animalesCompletos, 0, _animalesCompletos.size() - 1);
+		//Ordenamiento salud
+		//3.
+		imprimirarreglo_Health(_animalesCompletos.size(), _animalesCompletos);
+		//3. Buscar la edad del animal
+		cout << "Ingresa la salud de un animal" << endl;
+		cin >> posibleHealth;
+		//3.Una variable de tipo entero va a tomar la posicion del dato en caso de que exista
+		recibir = busquedaBinaria_Health(posibleHealth, _animalesCompletos);
+		//3.Al final se imprime
+		cout << "Se encuentra en la posicion: " << recibir << endl;
+	}
 
 	cin.get();
 	cin.ignore();
