@@ -12,34 +12,10 @@ public:
 	Cola() {};
 
 	//Funcion para crear un nodo y agregar datos
-	void Add_Cola(int _num)
-	{
-		if (PrimerNodo != nullptr)
-		{
-			Nodo *Temporal = new Nodo(_num);
-			PrimerNodo->Add_Nodo(Temporal);
-		}
-		else
-		{
-			PrimerNodo = new Nodo(_num);
-		}
-	}
+	void Add_Cola(int _num);
 	//Funcion para mandar a llamar a la funcion imprimir del nodo
-	void Imprimir_Cola_Nodo()
-	{
-		if (PrimerNodo != nullptr)
-		{
-			PrimerNodo->Imprimir_Nodo();
-		}
-		else
-		{
-			cout << "No hay datos, gomen gomen uwu" << endl;
-		}
-	}
+	void Imprimir_Cola_Nodo();
 	//Funcion para eliminar los datos
-	void Delete_Cola()
-	{
-		delete PrimerNodo;
-	}
+	void Delete_Cola();
 };
 

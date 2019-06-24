@@ -15,6 +15,7 @@ void Funcion_Pila()
 	cin >> Contador;
 	cout << "Ingresa un numero o numeros para agregar a la cubeta/pila" << endl;
 
+	//Ciclo para ingresar los datos
 	for (int i = 0; i < Contador; i++)
 	{
 		cout << i + 1 << " -> ";
@@ -38,6 +39,7 @@ void Funcion_Cola()
 	cin >> Contador;
 	cout << "Ingresa un numero o numeros para agregar a la cubeta/pila" << endl;
 
+	//Ciclo para ingresar los datos
 	for (int i = 0; i < Contador; i++)
 	{
 		cout << i + 1 << " -> ";
@@ -70,7 +72,6 @@ int main()
 		cout << "Valor incorrecto, ingrese un dato valido" << endl;
 		return main();
 	}
-
 	cin.get();
 	cin.ignore();
 	return 0;
