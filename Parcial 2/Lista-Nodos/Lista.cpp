@@ -4,43 +4,25 @@ using namespace std;
 
 void Funcion_Lista()
 {
-	Nodo *Informacion = nullptr;
-	Nodo *Puntero = nullptr;
-	int Valores = 0;
+	//Variables u objetos 
 	int Contador = 0;
+	int Numeros = 0;
+	Lista Objeto;
+
 	cout << "-----Inicio del programa-----" << endl;
 
 	cout << "Ingresa la cantidad de elementos" << endl;
 	cin >> Contador;
 	cout << "Ingresa los numeros" << endl;
-
-	//Ciclo para emepzar a ingresar los datos a los nodos
 	for (int i = 0; i < Contador; i++)
 	{
-		cout << i + 1 << " -> ";
-		cin >> Contador;
-		Informacion = Puntero->Crear_Nodo(Informacion, Valores);
+		cout << i + 1 << " - > ";
+		cin >> Numeros;
+		Objeto.Add_Lista(Numeros);
 	}
-
-	//Instruccion para mandar a imprimir los datos
-	Puntero->Imprimir_Datos(Informacion);
+	Objeto.Imprimir_Lista_Nodo();
+	Objeto.Delete_Lista();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //Clase inicial y menu
 int main()

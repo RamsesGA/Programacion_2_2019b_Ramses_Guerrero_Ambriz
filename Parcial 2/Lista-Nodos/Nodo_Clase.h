@@ -6,39 +6,51 @@ using namespace std;
 class Nodo
 {
 public:
-	//Atributos - miembros
-	int Datos;
-	Nodo *Puntero_Anterior;
-	Nodo* Puntero_Siguiente;
-	//Metodos - constructores
+	//Miembros o atributos
+	Nodo *Nodo_Siguiente;
+	Nodo *Nodo_Anterior;
+	int Numero;
+
+	//Metodos
 	Nodo() {};
 
-	//Para crear el nodo
-	Nodo *Crear_Nodo(Nodo *Info, int _dato)
+	//Funcion para crear un nodo nuevo
+	Nodo(int _Num)
 	{
-		Nodo *Nuevo_Nodo = new Nodo();
-		Nuevo_Nodo->Datos = _dato;
-		Nuevo_Nodo->Puntero_Siguiente = nullptr;
-		Nuevo_Nodo->Puntero_Anterior = nullptr;
-		Info = Nuevo_Nodo;
-		return Info;
+		Numero = _Num;
+		Nodo_Siguiente = nullptr;
+		Nodo_Anterior = nullptr;
 	}
 
-	void Imprimir_Datos(Nodo *Info)
+	//Funcion para agregar el dato
+	void Add_Nodo(Nodo *_Nuevo_Nodo)
 	{
-		Nodo *Temporal = Info;
-		cout << "-----Impresion izquierda a derecha-----" << endl;
-		while (Temporal != nullptr)
+		if (Nodo_Siguiente != nullptr)
 		{
-			cout << "Los numeros son :" << Temporal->Datos << endl;	
-			Temporal = Temporal->Puntero_Siguiente;
+			Nodo_Siguiente->Add_Nodo(_Nuevo_Nodo);
 		}
-		//Temporal = Info;
-		cout << "Impresion derecha a izquierda" << endl;
-		while (Temporal != nullptr)
+		else
 		{
-			cout << "Los numeros son :" << Temporal->Datos << endl;
-			Temporal = Temporal->Puntero_Anterior;
+			Nodo_Siguiente = _Nuevo_Nodo;
+		}
+	}
+
+	//Funcion para imprimir los datos
+	void Imprimir_Nodo()
+	{
+		cout << "Los numeros son: " << Numero <<endl;
+		if (Nodo_Siguiente != nullptr)
+		{
+			Nodo_Siguiente->Imprimir_Nodo();
+		}
+	}
+
+	//Funcion para el destructor
+	~Nodo()
+	{
+		if (Nodo_Siguiente != nullptr)
+		{
+			delete Nodo_Siguiente;
 		}
 	}
 };
