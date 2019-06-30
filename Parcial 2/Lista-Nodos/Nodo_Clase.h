@@ -13,4 +13,5 @@ public:
 
 	//Metodos
 	Nodo() {};
+	~Nodo();
 };

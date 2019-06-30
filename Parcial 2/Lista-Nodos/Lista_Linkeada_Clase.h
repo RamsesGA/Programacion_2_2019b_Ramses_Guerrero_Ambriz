@@ -26,6 +26,10 @@ public:
 	void print_Reverse();
 	//Funcion para imprimir de inicio a fin
 	void print_Forward();
+	//Funcion para poder añadir un elemento X
+	void add_X(int _input, int _dato);
+	//Funcion para eleminar en X
+	void remove_X(int _input);
 	//Destructor
 	~Lista_Linkeada_Clase();
 	
