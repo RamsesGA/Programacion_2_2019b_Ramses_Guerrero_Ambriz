@@ -54,7 +54,8 @@ void Funcion_lista()
 
 	cout << "\nIngresa\n 1- - >Para ingresar un nuevo nodo\n 2- - >Para el ordenamiento bubblesort\n 3- - >Para el ordenamiento quicksort" << endl;
 	cin >> controlador;
-
+	//Funcion para limpiar la pantalla
+	system("cls");
 	switch (controlador)
 	{
 		case 1:
@@ -74,6 +75,7 @@ void Funcion_lista()
 			Add_data_bubble(objeto.n_Header);
 			break;
 		case 3:
+			Add_data_quick(objeto.n_Header);
 			break;
 	default:
 		cout << "Ingreso un valor erroneo, el programa se va a cerrar" << endl;

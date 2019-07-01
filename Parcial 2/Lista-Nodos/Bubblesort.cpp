@@ -44,7 +44,7 @@ void Add_data_bubble(Nodo *_temp)
 	Print_bubble(resu_Final, contador);
 }
 
-//Fucnión para poder imprimir el resultado final
+//Función para poder imprimir el resultado final
 void Print_bubble(vector <Nodo*> _resu_Final, int _contador)
 {
 	for (int i = 0; i < _contador; i++)
