@@ -36,6 +36,8 @@ void Funcion_lista()
 		cin >> dato;
 		objeto.add_Back(dato);
 	}
+	//Se almacena la longitud
+	longitud_Final = contador_Front + contador_Back;
 	//Se hace una limpieza de pantalla
 	system("cls");
 	//Imprimimos el resultado para corroborar que no hay problemas
@@ -48,17 +50,17 @@ void Funcion_lista()
 	objeto.print_Reverse();
 
 	//Un pequeño menu para empezar la siguiente parte del programa las opciones son:
-	//1-Poder ingresar un nuevo nodo en una posición dentro del parámetro
-	//2-Ordenamiento bubblesort
-	//3-Ordenamiento quicksort
 
-	cout << "\nIngresa\n 1- - >Para ingresar un nuevo nodo\n 2- - >Para el ordenamiento bubblesort\n 3- - >Para el ordenamiento quicksort" << endl;
+	cout << "\nIngresa\n 1- - >Para ingresar un nuevo nodo\n 2- - >Para eliminar un nodo\n 3- - >Para el ordenamiento bubblesort\n 4- - >Para el ordenamiento quicksort" << endl;
 	cin >> controlador;
 	//Funcion para limpiar la pantalla
 	system("cls");
 	switch (controlador)
 	{
 		case 1:
+			//Solo se imprime para comparar
+			cout << "\nLos datos actuales son :" << endl;
+			objeto.print_Forward();
 			//Está parte es para poder ingresar un dato extra, pedimos el dato a ingresar 
 			cout << "\nIngresa la posicion" << endl;
 			cin >> input;
@@ -67,15 +69,32 @@ void Funcion_lista()
 			cin >> dato;
 			objeto.add_X(input, dato);
 			//Se imprime, para checar si el dato se ingresó
+			cout << "\nLos datos actuales son :" << endl;
+			cout << "- - > ";
+			objeto.print_Forward();
+			break;
+		case 2:
+			//Solo se imprime para comparar
+			objeto.print_Forward();
+			//Está parte es para poder ingresar un valor y buscarlo para borrar
+			cout << "\nIngresa la posicion" << endl;
+			cin >> input;
+			objeto.remove_X(input);
+			//Se imprime, para checar si el nodo se eliminó
 			cout << "\nLos valores de Inicio a Fin, son :" << endl;
 			cout << "- - > ";
 			objeto.print_Forward();
 			break;
-		case 2:			
-			Add_data_bubble(objeto.n_Header);
-			break;
 		case 3:
-			Add_data_quick(objeto.n_Header);
+			cout << "Antes - - > ";
+			objeto.print_Forward();
+			Bubble(objeto.n_Header->p_Next, objeto.n_Trailer);
+			cout << "Ahora - - >";
+			objeto.print_Forward();
+			break;
+		case 4:
+			cout << "En proceso" << endl;
+			//Add_data_quick(objeto.n_Header);
 			break;
 	default:
 		cout << "Ingreso un valor erroneo, el programa se va a cerrar" << endl;

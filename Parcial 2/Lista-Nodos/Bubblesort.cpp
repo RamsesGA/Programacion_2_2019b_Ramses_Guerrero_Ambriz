@@ -1,55 +1,31 @@
 #include "Librerias_Clases.h"
 
 //Funcion del metodo burbuja
-vector <Nodo*> Bubble(vector <Nodo*> _punteros, int _contador)
+void Bubble(Nodo * _Header, Nodo *_Trailer)
 {
-	int temp = 0;
-	bool bandera;
-	//Ciclo para acomodar
-	for (int i = _contador - 1; i > 0; i--)
+	//Nodos temporales para poder hacer la comparación
+	Nodo *temp = _Header;
+	Nodo *temp_2;
+	int valor_temp = 0;
+	//Ciclo para tener un control de la longitud de las listas
+	while (temp->p_Next != _Trailer)
 	{
-		bandera = false;
-		for (int j = 0; j < _contador - 1; j++)
+		//Se desplaza el nodo al siguiente en caso de que el if entre
+		temp_2 = temp->p_Next;
+		//Ciclo para poder checar valor por valor
+		while (temp_2 != _Trailer)
 		{
-			if (_punteros[j]->Dato > _punteros[j + 1]->Dato)
+			//Condición para poder comparar y cambiar en caso de ser afirmativo
+			if (temp_2->Dato < temp->Dato)
 			{
-				temp = _punteros[j]->Dato;
-				_punteros[j]->Dato = _punteros[j + 1]->Dato;
-				_punteros[j + 1]->Dato = temp;
-				bandera = true;
+				valor_temp = temp->Dato;
+				temp->Dato = temp_2->Dato;
+				temp_2->Dato = valor_temp;
 			}
+			//En casó que no se cumpla la condición avanzara el dato
+			temp_2 = temp_2->p_Next;
 		}
-		//Condición en caso de que el algortimos ya este ordenado
-		if (bandera == false)
-		{
-			break;
-		}
-	}
-	return _punteros;
-}
-
-//Funcion para poder añadir los nodos al vector
-void Add_data_bubble(Nodo *_temp)
-{
-	vector <Nodo*> punteros;
-	vector <Nodo*> resu_Final;
-	int contador = 0;
-	while (_temp->p_Next != nullptr)
-	{
-		contador++;
-		punteros.push_back(_temp->p_Next);
-		_temp = _temp->p_Next;
-	}
-	resu_Final = Bubble(punteros, contador);
-	Print_bubble(resu_Final, contador);
-}
-
-//Función para poder imprimir el resultado final
-void Print_bubble(vector <Nodo*> _resu_Final, int _contador)
-{
-	for (int i = 0; i < _contador; i++)
-	{
-		cout << " - -> ";
-		cout << _resu_Final[i]->Dato;
+		//Necesario para evitar un while infinito
+		temp = temp->p_Next;
 	}
 }
