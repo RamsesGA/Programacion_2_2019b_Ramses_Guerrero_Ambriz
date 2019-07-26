@@ -1,5 +1,6 @@
 #include "Libraries.h"
 #include "Node.h"
+#include "Tree.h"
 
 void tree()
 {
@@ -10,7 +11,7 @@ void tree()
 	unsigned int age;
 	unsigned int menu = 1;
 
-	Node obj;
+	Tree obj;
 	Node *n_tree = nullptr;
 
 	cout << "\n---Arboles---" << endl;
