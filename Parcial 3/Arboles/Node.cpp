@@ -27,9 +27,9 @@ void Node::insert_node(Node *& _tree, string _last, string _name, unsigned int _
 	}
 	else
 	{
-		unsigned int data = _tree->age;
+		string data = _tree->last_name;
 		//Para ordenar los datos menores a la raíz a la izquierda
-		if (_age < data)
+		if (_last < data)
 		{
 			insert_node(_tree->p_left, _last, _name, _age);
 		}
