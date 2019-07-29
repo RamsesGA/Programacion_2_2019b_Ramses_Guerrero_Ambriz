@@ -9,11 +9,11 @@ int secuencia(float _a, float _b, float _c)
 	//Sacamos la cantidad de numeros a repetir
 	int division = (_b / _c) - (_a / _c);
 
-	media = division / 2;
+	media = division / 2.0;
 	media = media * _c;
 	media = _a + media;
 
-	result = media * (division + _a);
+	result = media * (division + 1);
 
 	cout << "Los numeros ingresados son " << "- - > " <<_a << "- - > " << _b << "- - > " << _c << endl;
 
