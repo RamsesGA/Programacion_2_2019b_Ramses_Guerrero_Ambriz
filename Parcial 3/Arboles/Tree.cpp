@@ -1,5 +1,6 @@
 #include "Tree.h"
 
+//--Nuevo nodo
 Node * Tree::new_node(string _last, string _name, unsigned int _age)
 {
 	Node *node = new Node();
@@ -16,6 +17,8 @@ Node * Tree::new_node(string _last, string _name, unsigned int _age)
 	return node;
 }
 
+
+//--Inserción
 void Tree::insert_node(Node *& _tree, string _last, string _name, unsigned int _age)
 {
 	//En caso de ser un nodo vacio
@@ -40,7 +43,8 @@ void Tree::insert_node(Node *& _tree, string _last, string _name, unsigned int _
 	}
 }
 
-//Impresion
+
+//--Impresion
 void Tree::in_order(Node * _tree)
 {
 	if (_tree == nullptr)
@@ -92,9 +96,57 @@ void Tree::post_order(Node * _tree)
 	}
 }
 
-Tree::Tree()
+
+//---Chequeo 
+void Tree::check(Node * _tree)
 {
+	//Primero checamos si el nodo a la izq no es la hoja
+	if (_tree->p_left != nullptr)
+	{
+		Node *temp = new Node();
+		//Entramos a la función del peso
+		node_weight(_tree, cont, temp);
+	}
+	if (_tree->p_rigth != nullptr)
+	{
+		//Aumentamos el valor de cont
+		cont++;
+		Node *temp = new Node();
+		//Entramos a la función del peso
+		node_weight(_tree, cont, temp);
+	}
 }
-Tree::~Tree()
+
+void Tree::node_weight(Node * _tree, unsigned int _cont, Node * _temp)
 {
+	_temp = _tree;
+	_temp->level = _cont;
+
+	if (_temp->p_left != nullptr)
+	{
+		_cont++;
+		node_weight(_tree->p_left, _cont, _temp);
+		//Declaramos que la posición va a tener tal peso
+		_tree->weight_left = _tree->p_left->all_weight;
+		_tree->all_weight = ((_tree->level * _tree->weight_right) + (_tree->level * _tree->weight_left));
+	}
+	if (_temp->p_rigth != nullptr)
+	{
+		cont++;
+		node_weight(_tree->p_rigth, _cont, _temp);
+		//Declaramos que la posición de tal nodo va a tener tal peso
+		_tree->weight_right = _tree->p_rigth->all_weight;
+		_tree->all_weight = ((_tree->level * _tree->weight_left) + (_tree->level * _tree->weight_right));
+	}
+	else
+	{
+		_temp->all_weight = _temp->level + 1;
+	}
 }
+
+
+//--Inicializador
+Tree::Tree() {}
+
+//--Destructor
+Tree::~Tree() {}

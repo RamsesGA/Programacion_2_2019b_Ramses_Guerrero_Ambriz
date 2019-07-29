@@ -23,7 +23,7 @@ void tree()
 			switch (menu)
 			{
 				case 1:
-					cout << "Nodo - - > " << cont << endl;
+					cout << "Nodos creados - - > " << cont << endl;
 
 					cout << "\nIngresa un apellido" << endl;
 					cin >> last;
@@ -53,7 +53,7 @@ void tree()
 	//Segundo menu
 	cout << "Cantidad de nodos - - > " << cont << endl;
 	cout << "\nMenu para la impresion" << endl;
-	cout << "Ingresa \n0-In order \n1-Pre order \n2-Post order" << endl;
+	cout << "Ingresa \n0-In order \n1-Pre order \n2-Post order \n3-Checar si el arbol esta equilibrado" << endl;
 	cin >> menu;
 
 	//Limpiamos la pantalla
@@ -84,6 +84,10 @@ void tree()
 				menu++;
 			}
 			break;
+		case 3:
+			cout << "\n--- > Arbol equilibrado <---" << endl;
+			obj.check(n_tree);
+
 		default:
 			cout << "\nIngresa un valor correcto" << endl;
 			return tree();
