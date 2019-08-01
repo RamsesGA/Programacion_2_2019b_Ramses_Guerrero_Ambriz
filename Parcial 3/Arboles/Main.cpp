@@ -25,6 +25,8 @@ void tree()
 				case 1:
 					cout << "Nodos creados - - > " << cont << endl;
 
+
+					//To_do: sobrecarga
 					cout << "\nIngresa un apellido" << endl;
 					cin >> last;
 					cout << "\nIngresa un nombre" << endl;
@@ -33,7 +35,7 @@ void tree()
 					cin >> age;
 
 					//Llamamos a la función
-					obj.insert_node(n_tree, last, name, age);
+					obj.insert_node(n_tree, last, name, age, nullptr);
 					cont++;
 
 					cout << "\nIngresa 0 Para terminar o 1 Para continuar" << endl;
@@ -54,6 +56,7 @@ void tree()
 	cout << "Cantidad de nodos - - > " << cont << endl;
 	cout << "\nMenu para la impresion" << endl;
 	cout << "Ingresa \n0-In order \n1-Pre order \n2-Post order \n3-Checar si el arbol esta equilibrado" << endl;
+	cout << "4-Eliminar una hoja/raiz" << endl;
 	cin >> menu;
 
 	//Limpiamos la pantalla
@@ -68,6 +71,7 @@ void tree()
 				menu++;
 			}
 			break;
+
 		case 1:
 			cout << "\n--- > Pre Order <---" << endl;
 			while (menu == 1)
@@ -76,6 +80,7 @@ void tree()
 				menu++;
 			}
 			break;
+
 		case 2:
 			cout << "\n--- > Post Order <---" << endl;
 			while (menu == 2)
@@ -84,9 +89,19 @@ void tree()
 				menu++;
 			}
 			break;
+
 		case 3:
 			cout << "\n--- > Arbol equilibrado <---" << endl;
 			obj.check(n_tree);
+			break;
+
+		case 4:
+			cout << "\n--- > Eliminar hoja/raiz <---" << endl;
+			cout << "Ingresa el apellido a eliminar" << endl;
+			cin >> last;
+			obj.eliminate(n_tree, last);
+			obj.in_order(n_tree);
+			break;
 
 		default:
 			cout << "\nIngresa un valor correcto" << endl;

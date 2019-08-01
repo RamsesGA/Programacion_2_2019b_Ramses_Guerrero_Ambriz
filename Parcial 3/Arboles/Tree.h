@@ -12,9 +12,9 @@ class Tree
 		//---Metodos
 
 		//Creación de un nodo
-		Node *new_node(string _last, string _name, unsigned int _age);
+		Node *new_node(string _last, string _name, unsigned int _age, Node *_father);
 		//Función para poder insertar nodos
-		void insert_node(Node *&_tree, string _last, string _name, unsigned int _age);
+		void insert_node(Node *&_tree, string _last, string _name, unsigned int _age, Node *_father);
 		//Tipos de recorrido
 		void in_order(Node *_tree);
 		void pre_order(Node *_tree);
@@ -22,7 +22,17 @@ class Tree
 		//Chequeo del arbol equilibrado
 		void check(Node *_tree);
 		//Función para poder asignar un peso a los nodos, incluso a la hoja
-		void node_weight(Node *_tree, unsigned int _cont, Node *_temp);
+		void node_weight(Node *_tree, unsigned int _cont);
+		//Función para poder eliminar un nodo exacto
+		void eliminate(Node *_tree, string _last);
+		//Función para eliminar un nodo exacto
+		void eliminate_node(Node *_node);
+		//Función para poder encontrar el nodo profundo de la izq
+		Node *minimum(Node *_node);
+		//Función para poder remplazar un nodo
+		void replace(Node *_node, Node *_new_node);
+		//Función para destruir el nodo que deja la función replace
+		void destroy_node(Node *_node);
 
 		Tree();
 		~Tree();

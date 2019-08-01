@@ -7,6 +7,7 @@ class Node
 		//--Miembros
 		Node *p_left;
 		Node *p_rigth;
+		Node *father;
 
 		string last_name;
 		string name;
