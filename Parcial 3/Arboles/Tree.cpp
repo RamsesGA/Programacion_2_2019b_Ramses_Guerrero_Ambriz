@@ -31,10 +31,13 @@ void Tree::insert_node(Node *& _tree, string _last, string _name, unsigned int _
 	}
 	else
 	{
-		//To_do: sobrecarga
-		string data = _tree->last_name;
+		Node *temp = new Node();
+		temp->last_name = _last;
+		temp->name = _name;
+		temp->age = _age;
+
 		//Para ordenar los datos menores a la raíz a la izquierda
-		if (_last < data)
+		if (*temp < *_tree)
 		{
 			insert_node(_tree->p_left, _last, _name, _age, _tree);
 		}
@@ -56,11 +59,17 @@ void Tree::in_order(Node * _tree)
 	else
 	{
 		//Usamos recursividad para recorrer primero el lado izq
-		in_order(_tree->p_left);
+		if (_tree->p_left != nullptr)
+		{
+			in_order(_tree->p_left);
+		}
 		//Imprimimos los datos
 		cout << _tree << endl;
 		//Finalmente pasamos al lado derecho
-		in_order(_tree->p_rigth);
+		if (_tree->p_rigth != nullptr)
+		{
+			in_order(_tree->p_rigth);
+		}
 	}
 }
 
@@ -153,20 +162,20 @@ void Tree::node_weight(Node * _tree, unsigned int _cont)
 
 
 //Eliminación
-void Tree::eliminate(Node *_tree, string _last)
+void Tree::eliminate(Node *_tree, Node *_temp)
 {
 	if (_tree == nullptr)
 	{
 		//No hace nada en caso de que el usuario no haya ingresado algo
 		return;
 	}
-	else if (_last < _tree->last_name)
+	else if (*_temp < *_tree)
 	{
-		eliminate(_tree->p_left, _last);
+		eliminate(_tree->p_left, _temp);
 	}
-	else if (_last > _tree->last_name)
+	else if (*_temp > *_tree)
 	{
-		eliminate(_tree->p_rigth, _last);
+		eliminate(_tree->p_rigth, _temp);
 	}
 	//En caso de que ya encontró el valor, procedemos a eliminar
 	else
@@ -234,13 +243,46 @@ void Tree::replace(Node *_node, Node * _new_node)
 	if (_node->father)
 	{
 		//Dentro al padre modifica su puntero al dato que se va a cambiar
-		if (_node->last_name == _node->father->p_left->last_name)
+
+		//Condición en caso de que sea un nodo par
+		if (_node->father->p_left != nullptr && _node->father->p_rigth != nullptr)
 		{
-			_node->father->p_left = _new_node;
+			if (_node->last_name == _node->father->p_left->last_name && _node->name == _node->father->p_left->name && _node->age == _node->father->p_left->age)
+			{
+				_node->father->p_left = _new_node;
+			}
+			else if (_node->last_name == _node->father->p_rigth->last_name && _node->name == _node->father->p_rigth->name && _node->age == _node->father->p_rigth->age)
+			{
+				_node->father->p_rigth = _new_node;
+			}
+			else
+			{
+				cout << "Ingreso un dato incorrecto" << endl;
+			}
 		}
-		else if (_node->last_name == _node->father->p_rigth->last_name)
+		//Un nodo impar a la izq
+		else if (_node->father->p_left != nullptr && _node->father->p_rigth == nullptr)
 		{
-			_node->father->p_rigth = _new_node;
+			if (_node->last_name == _node->father->p_left->last_name && _node->name == _node->father->p_left->name && _node->age == _node->father->p_left->age)
+			{
+				_node->father->p_left = _new_node;
+			}
+			else
+			{
+				cout << "Ingreso un dato incorrecto" << endl;
+			}
+		}
+		//Un nodo impar a la dere
+		else if (_node->father->p_left == nullptr && _node->father->p_rigth != nullptr)
+		{
+			if (_node->last_name == _node->father->p_rigth->last_name && _node->name == _node->father->p_rigth->name && _node->age == _node->father->p_rigth->age)
+			{
+				_node->father->p_rigth = _new_node;
+			}
+			else
+			{
+				cout << "Ingreso un dato incorrecto" << endl;
+			}
 		}
 	}
 	if (_new_node)

@@ -24,7 +24,7 @@ class Tree
 		//Función para poder asignar un peso a los nodos, incluso a la hoja
 		void node_weight(Node *_tree, unsigned int _cont);
 		//Función para poder eliminar un nodo exacto
-		void eliminate(Node *_tree, string _last);
+		void eliminate(Node *_tree, Node *_temp);
 		//Función para eliminar un nodo exacto
 		void eliminate_node(Node *_node);
 		//Función para poder encontrar el nodo profundo de la izq

@@ -25,8 +25,6 @@ void tree()
 				case 1:
 					cout << "Nodos creados - - > " << cont << endl;
 
-
-					//To_do: sobrecarga
 					cout << "\nIngresa un apellido" << endl;
 					cin >> last;
 					cout << "\nIngresa un nombre" << endl;
@@ -58,7 +56,7 @@ void tree()
 	cout << "Ingresa \n0-In order \n1-Pre order \n2-Post order \n3-Checar si el arbol esta equilibrado" << endl;
 	cout << "4-Eliminar una hoja/raiz" << endl;
 	cin >> menu;
-
+	Node *temp = new Node();
 	//Limpiamos la pantalla
 	system("cls");
 	switch (menu)
@@ -97,9 +95,10 @@ void tree()
 
 		case 4:
 			cout << "\n--- > Eliminar hoja/raiz <---" << endl;
-			cout << "Ingresa el apellido a eliminar" << endl;
-			cin >> last;
-			obj.eliminate(n_tree, last);
+
+			cout << "Ingresa los datos siguientes" << endl;
+			cin >> temp;
+			obj.eliminate(n_tree, temp);
 			obj.in_order(n_tree);
 			break;
 
