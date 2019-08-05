@@ -12,6 +12,7 @@ void tree()
 	unsigned int age;
 	unsigned int menu = 1;
 
+	Node<Person> *test_node;
 	Tree<Person> obj;
 	Node<Person>*n_tree = nullptr;
 
@@ -26,15 +27,10 @@ void tree()
 				case 1:
 					cout << "Nodos creados - - > " << cont << endl;
 
-					cout << "\nIngresa un apellido" << endl;
-					cin >> last;
-					cout << "\nIngresa un nombre" << endl;
-					cin >> name;
-					cout << "\nIngresa una edad" << endl;
-					cin >> age;
-
+					test_node = new Node<Person>(Person());
+					
 					//Llamamos a la función
-					obj.insert_node(n_tree, last, name, age, nullptr);
+					obj.insert_node(n_tree, test_node, nullptr);
 					cont++;
 
 					cout << "\nIngresa 0 Para terminar o 1 Para continuar" << endl;
@@ -98,7 +94,7 @@ void tree()
 			cout << "\n--- > Eliminar hoja/raiz <---" << endl;
 
 			cout << "Ingresa los datos siguientes" << endl;
-			cin >> temp;
+			cin >> *temp;
 			obj.eliminate(n_tree, temp);
 			obj.in_order(n_tree);
 			break;

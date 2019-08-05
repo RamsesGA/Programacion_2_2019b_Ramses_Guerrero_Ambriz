@@ -18,10 +18,16 @@ class Node
 		unsigned int weight_left = 0;
 		unsigned int weight_right = 0;
 		unsigned int all_weight = 0;
+
+
 	
 		//--Metodos
+		friend istream & operator >> (istream & is, Node<T> & N);
+
 
 		Node(T _info);
 		Node();
 		~Node();
+
+
 };

@@ -14,10 +14,10 @@ class Tree
 		//---Metodos
 	
 		//Creación de un nodo
-		Node<T> *new_node(Node<Person> _dato, Node<T> *_father);
+		Node<T> *new_node(Node<T> _dato, Node<T> *_father);
 	
 		//Función para poder insertar nodos
-		void insert_node(Node<T> *&_tree, string _last, string _name, unsigned int _age, Node<T> *_father);
+		void insert_node(Node<T> *&_tree, Node <T> *_dato, Node<T> *_father);
 	
 		//Tipos de recorrido
 		void in_order(Node<T> *_tree);

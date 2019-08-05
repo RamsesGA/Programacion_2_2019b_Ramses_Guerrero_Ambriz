@@ -11,8 +11,6 @@ class Person
 		unsigned int age;
 
 		//Metodos
-
-
 		//-Sobrecargas de operadores
 
 		//Output
@@ -76,15 +74,16 @@ class Person
 			}
 		}
 
-		Person(string _last, string _name, unsigned int _age)
+		Person()
 		{
-			last_name = _last;
-			name = _name;
-			age = _age;
+			cout << "\nIngresa un apellido" << endl;
+			cin >> last_name;
+			cout << "\nIngresa un nombre" << endl;
+			cin >> name;
+			cout << "\nIngresa una edad" << endl;
+			cin >> age;
 		}
 
-		Person();
-
-		~Person();
+		~Person() {}
 };
 

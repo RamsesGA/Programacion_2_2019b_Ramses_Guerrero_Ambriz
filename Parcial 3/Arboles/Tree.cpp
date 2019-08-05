@@ -2,15 +2,13 @@
 
 //--Nuevo nodo
 template <class T>
-Node<T> * Tree<T>::new_node(Node<Person> _dato, Node<T> *_father)
+Node<T> * Tree<T>::new_node(Node<T> _dato, Node<T> *_father)
 {
-	Node *node = new Node();
+	Node<T> *node = new Node<T>();
 
 	//Almacenamos los datos
-	node->last_name = _last;
-	node->name = _name;
-	node->age = _age;
-	node->level++;
+	node->Personas = _dato.Personas;
+
 	node->father = _father;
 
 	//Indicamos lo que apuntará el nuevo pudiendo ser la raíz o las hojas
@@ -23,30 +21,28 @@ Node<T> * Tree<T>::new_node(Node<Person> _dato, Node<T> *_father)
 
 //--Inserción
 template <class T>
-void Tree<T>::insert_node(Node<T> *& _tree, string _last, string _name, unsigned int _age, Node<T> *_father)
+void Tree<T>::insert_node(Node<T> *& _tree,Node<T> *_dato, Node<T> *_father)
 {
 	//En caso de ser un nodo vacio
 	if (_tree == nullptr)
 	{
-		Node *n_node = new_node(_last, _name, _age, _father);
+		Node<T> *n_node = new_node(_dato, _father);
 		//Guardamos el nuevo nodo
 		_tree = n_node;
 	}
 	else
 	{
-		Node *temp = new Node();
-		temp->last_name = _last;
-		temp->name = _name;
-		temp->age = _age;
+		Node<T> *temp = new Node<T>();
+		temp->Personas = _dato->Personas;
 
 		//Para ordenar los datos menores a la raíz a la izquierda
 		if (*temp < *_tree)
 		{
-			insert_node(_tree->p_left, _last, _name, _age, _tree);
+			insert_node(_tree->p_left, _dato, _tree);
 		}
 		else
 		{
-			insert_node(_tree->p_rigth, _last, _name, _age, _tree);
+			insert_node(_tree->p_rigth, _dato, _tree);
 		}
 	}
 }
@@ -89,9 +85,15 @@ void Tree<T>::pre_order(Node<T> * _tree)
 		//Imprimimos los datos
 		cout << _tree << endl;
 		//Usamos recursividad para recorrer primero el lado izq
-		pre_order(_tree->p_left);
+		if (_tree->p_left != nullptr)
+		{
+			pre_order(_tree->p_left);
+		}		
 		//Finalmente pasamos al lado derecho
-		pre_order(_tree->p_rigth);
+		if (_tree->p_rigth != nullptr)
+		{
+			pre_order(_tree->p_rigth);
+		}
 	}
 }
 
@@ -105,9 +107,15 @@ void Tree<T>::post_order(Node<T> * _tree)
 	else
 	{
 		//Usamos recursividad para recorrer primero el lado izq
-		post_order(_tree->p_left);
+		if (_tree->p_left != nullptr)
+		{
+			post_order(_tree->p_left);
+		}
 		//Finalmente pasamos al lado derecho
-		post_order(_tree->p_rigth);
+		if (_tree->p_rigth != nullptr)
+		{
+			post_order(_tree->p_rigth);
+		}
 		//Imprimimos los datos
 		cout << _tree << endl;
 	}
@@ -128,7 +136,7 @@ void Tree<T>::check(Node<T> * _tree)
 	{
 		//Aumentamos el valor de cont
 		cont++;
-		Node *temp = new Node();
+		Node<T> *temp = new Node<T>();
 		//Entramos a la función del peso
 		node_weight(_tree, cont);
 	}
@@ -199,11 +207,10 @@ void Tree<T>::eliminate_node(Node<T> * _node)
 	//Eliminamos un nodo, en caso de que sea par
 	if (_node->p_left != nullptr && _node->p_rigth != nullptr)
 	{
-		Node *less = minimum(_node->p_rigth);
+		Node<T> *less = minimum(_node->p_rigth);
 
-		_node->last_name = less->last_name;
-		_node->name = less->name;
-		_node->age = less->age;
+		//CUIDADO
+		_node->Personas = less->Personas;
 
 		//matamos el nodo
 		eliminate_node(less);
@@ -315,7 +322,7 @@ void Tree<T>::destroy_node(Node<T> * _node)
 template <class T>
 void Tree<T>::rotate_right(Node<T> * _tree)
 {
-	Node *temp = new Node();
+	Node<T> *temp = new Node<T>();
 	temp = _tree->p_left;
 
 	//Re apuntamos todo
@@ -329,7 +336,7 @@ void Tree<T>::rotate_right(Node<T> * _tree)
 template <class T>
 void Tree<T>::rotate_left(Node<T> * _tree)
 {
-	Node *temp = new Node();
+	Node<T> *temp = new Node<T>();
 	temp = _tree->p_rigth;
 
 	//Re apuntamos todo
