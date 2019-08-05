@@ -1,7 +1,8 @@
 #include "Tree.h"
 
 //--Nuevo nodo
-Node * Tree::new_node(string _last, string _name, unsigned int _age, Node *_father)
+template <class T>
+Node<T> * Tree<T>::new_node(Node<Person> _dato, Node<T> *_father)
 {
 	Node *node = new Node();
 
@@ -9,6 +10,7 @@ Node * Tree::new_node(string _last, string _name, unsigned int _age, Node *_fath
 	node->last_name = _last;
 	node->name = _name;
 	node->age = _age;
+	node->level++;
 	node->father = _father;
 
 	//Indicamos lo que apuntará el nuevo pudiendo ser la raíz o las hojas
@@ -20,7 +22,8 @@ Node * Tree::new_node(string _last, string _name, unsigned int _age, Node *_fath
 
 
 //--Inserción
-void Tree::insert_node(Node *& _tree, string _last, string _name, unsigned int _age, Node *_father)
+template <class T>
+void Tree<T>::insert_node(Node<T> *& _tree, string _last, string _name, unsigned int _age, Node<T> *_father)
 {
 	//En caso de ser un nodo vacio
 	if (_tree == nullptr)
@@ -50,7 +53,8 @@ void Tree::insert_node(Node *& _tree, string _last, string _name, unsigned int _
 
 
 //--Impresion
-void Tree::in_order(Node * _tree)
+template <class T>
+void Tree<T>::in_order(Node<T> * _tree)
 {
 	if (_tree == nullptr)
 	{
@@ -73,7 +77,8 @@ void Tree::in_order(Node * _tree)
 	}
 }
 
-void Tree::pre_order(Node * _tree)
+template <class T>
+void Tree<T>::pre_order(Node<T> * _tree)
 {
 	if (_tree == nullptr)
 	{
@@ -90,7 +95,8 @@ void Tree::pre_order(Node * _tree)
 	}
 }
 
-void Tree::post_order(Node * _tree)
+template <class T>
+void Tree<T>::post_order(Node<T> * _tree)
 {
 	if (_tree == nullptr)
 	{
@@ -109,7 +115,8 @@ void Tree::post_order(Node * _tree)
 
 
 //---Chequeo 
-void Tree::check(Node * _tree)
+template <class T>
+void Tree<T>::check(Node<T> * _tree)
 {
 	//Primero checamos si el nodo a la izq no es la hoja
 	if (_tree->p_left != nullptr)
@@ -127,7 +134,8 @@ void Tree::check(Node * _tree)
 	}
 }
 
-void Tree::node_weight(Node * _tree, unsigned int _cont)
+template <class T>
+void Tree<T>::node_weight(Node<T> * _tree, unsigned int _cont)
 {
 
 	if (_tree->p_left != nullptr)
@@ -162,7 +170,8 @@ void Tree::node_weight(Node * _tree, unsigned int _cont)
 
 
 //Eliminación
-void Tree::eliminate(Node *_tree, Node *_temp)
+template <class T>
+void Tree<T>::eliminate(Node<T> *_tree, Node<T> *_temp)
 {
 	if (_tree == nullptr)
 	{
@@ -184,7 +193,8 @@ void Tree::eliminate(Node *_tree, Node *_temp)
 	}
 }
 
-void Tree::eliminate_node(Node * _node)
+template <class T>
+void Tree<T>::eliminate_node(Node<T> * _node)
 {
 	//Eliminamos un nodo, en caso de que sea par
 	if (_node->p_left != nullptr && _node->p_rigth != nullptr)
@@ -217,7 +227,8 @@ void Tree::eliminate_node(Node * _node)
 	}
 }
 
-Node * Tree::minimum(Node *_node)
+template <class T>
+Node<T> * Tree<T>::minimum(Node<T> *_node)
 {
 	if (_node == nullptr)
 	{
@@ -237,7 +248,8 @@ Node * Tree::minimum(Node *_node)
 
 }
 
-void Tree::replace(Node *_node, Node * _new_node)
+template <class T>
+void Tree<T>::replace(Node<T> *_node, Node<T> * _new_node)
 {
 	//Para saber si el nodo que se envió tiene padre
 	if (_node->father)
@@ -292,15 +304,54 @@ void Tree::replace(Node *_node, Node * _new_node)
 	}
 }
 
-void Tree::destroy_node(Node * _node)
+template <class T>
+void Tree<T>::destroy_node(Node<T> * _node)
 {
 	_node->p_left = nullptr;
 	_node->p_rigth = nullptr;
 	delete _node;
 }
 
+template <class T>
+void Tree<T>::rotate_right(Node<T> * _tree)
+{
+	Node *temp = new Node();
+	temp = _tree->p_left;
+
+	//Re apuntamos todo
+	temp->p_rigth->father = temp->father;
+	temp->father = _tree->father;
+	_tree->father = _tree->p_left;
+	_tree->p_left = _tree->father->p_rigth;
+	temp->p_rigth = temp->p_rigth->father;
+}
+
+template <class T>
+void Tree<T>::rotate_left(Node<T> * _tree)
+{
+	Node *temp = new Node();
+	temp = _tree->p_rigth;
+
+	//Re apuntamos todo
+	temp->p_left->father = temp->father;
+	temp->father = _tree->father;
+	_tree->father = _tree->p_rigth;
+	_tree->p_rigth = _tree->father->p_left;
+	temp->p_left = temp->p_left->father;
+}
+
+template<class T>
+Tree<T>::Tree(Node<T>* _root)
+{
+	root = _root;
+}
 
 //--Inicializador
-Tree::Tree() {}
+template <class T>
+Tree<T>::Tree() {}
 //--Destructor
-Tree::~Tree() {}
+template <class T>
+Tree<T>::~Tree() {}
+
+//Importante
+template class Node <Person>;

@@ -1,6 +1,7 @@
 #include "Libraries.h"
 #include "Node.h"
 #include "Tree.h"
+#include "Person.h"
 
 void tree()
 {
@@ -11,8 +12,8 @@ void tree()
 	unsigned int age;
 	unsigned int menu = 1;
 
-	Tree obj;
-	Node *n_tree = nullptr;
+	Tree<Person> obj;
+	Node<Person>*n_tree = nullptr;
 
 	cout << "\n---Arboles---" << endl;
 
@@ -54,9 +55,9 @@ void tree()
 	cout << "Cantidad de nodos - - > " << cont << endl;
 	cout << "\nMenu para la impresion" << endl;
 	cout << "Ingresa \n0-In order \n1-Pre order \n2-Post order \n3-Checar si el arbol esta equilibrado" << endl;
-	cout << "4-Eliminar una hoja/raiz" << endl;
+	cout << "4-Eliminar una hoja/raiz \n5-Rotacion" << endl;
 	cin >> menu;
-	Node *temp = new Node();
+	Node<Person> *temp = new Node<Person>();
 	//Limpiamos la pantalla
 	system("cls");
 	switch (menu)
@@ -100,6 +101,20 @@ void tree()
 			cin >> temp;
 			obj.eliminate(n_tree, temp);
 			obj.in_order(n_tree);
+			break;
+
+		case 5:
+			cout << "\n--- > Rotacion <---" << endl;
+			cout << "Ingresa \n0-Rotar derecha \n1-Rotar izquierda" << endl;
+			cin >> menu;
+			if (menu == 0)
+			{
+				obj.rotate_right(n_tree);
+			}
+			else if (menu == 1)
+			{
+				obj.rotate_left(n_tree);
+			}
 			break;
 
 		default:

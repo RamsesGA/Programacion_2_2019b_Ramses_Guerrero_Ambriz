@@ -1,17 +1,18 @@
 #pragma once
-#include "Libraries.h"
+#include "Person.h"
 
+template <class T>
 class Node
 {
 	public:
 		//--Miembros
-		Node *p_left;
-		Node *p_rigth;
-		Node *father;
-	
-		string last_name;
-		string name;
-		unsigned int age;
+		Node<T> *p_left;
+		Node<T> *p_rigth;
+		Node<T> *father;
+
+		T Personas;
+
+		//Tipo de multidato
 	
 		unsigned int level = 0;
 		unsigned int weight_left = 0;
@@ -19,19 +20,8 @@ class Node
 		unsigned int all_weight = 0;
 	
 		//--Metodos
-	
-		//-Sobrecargas de operadores
-	
-		//Output
-		friend ostream & operator << (ostream & _out, Node *_tree);
-		//Input
-		friend istream & operator >> (istream &_in, Node *_node);
-	
-		//Comparación
-		bool operator < (Node &_node);
-		bool operator > (Node &_node);
-	
-			Node();
-			~Node();
-};
 
+		Node(T _info);
+		Node();
+		~Node();
+};
