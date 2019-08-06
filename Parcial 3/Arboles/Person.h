@@ -11,24 +11,46 @@ class Person
 		unsigned int age;
 
 		//Metodos
+
+		//Constructor para poder ingresar los datos y guardarlos
+		Person()
+		{
+			cout << "\nIngresa un apellido" << endl;
+			cin >> last_name;
+			cout << "\nIngresa un nombre" << endl;
+			cin >> name;
+			cout << "\nIngresa una edad" << endl;
+			cin >> age;
+		}
+
+		//Constructor para guardar los datos
+		Person(string _last, string _name, unsigned int _age)
+		{
+			last_name = _last;
+			name = _name;
+			age = _age;
+		}
+
+		//Destructor
+		~Person() {}
 		//-Sobrecargas de operadores
 
 		//Output
-		friend ostream & operator << (ostream & _out, Person *_node)
+		friend ostream & operator << (ostream & _out, Person _node)
 		{
-			_out << "\nEl apellido es - - > " << _node->last_name << "\nEl nombre es - - > " << _node->name << "\nY la edad es - - > " << _node->age << endl;
+			_out << "\nEl apellido es - - > " << _node.last_name << "\nEl nombre es - - > " << _node.name << "\nY la edad es - - > " << _node.age << endl;
 			return _out;
 		}
 
 		//Input
-		friend istream & operator >> (istream &_in, Person *_node)
+		friend istream & operator >> (istream &_in, Person _node)
 		{
 			cout << "\nIngresa un apellido" << endl;
-			_in >> _node->last_name;
+			_in >> _node.last_name;
 			cout << "\nIngresa un nombre" << endl;
-			_in >> _node->name;
+			_in >> _node.name;
 			cout << "\nIngresa una edad" << endl;
-			_in >> _node->age;
+			_in >> _node.age;
 			return _in;
 		}
 
@@ -74,16 +96,17 @@ class Person
 			}
 		}
 
-		Person()
+		//Sobrecarga de operador de == 
+		bool operator == (Person &_node)
 		{
-			cout << "\nIngresa un apellido" << endl;
-			cin >> last_name;
-			cout << "\nIngresa un nombre" << endl;
-			cin >> name;
-			cout << "\nIngresa una edad" << endl;
-			cin >> age;
+			if (last_name == _node.last_name && name == _node.name && age == _node.age)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
-
-		~Person() {}
 };
 

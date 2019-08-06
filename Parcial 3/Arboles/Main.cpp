@@ -12,9 +12,8 @@ void tree()
 	unsigned int age;
 	unsigned int menu = 1;
 
-	Node<Person> *test_node;
-	Tree<Person> obj;
-	Node<Person>*n_tree = nullptr;
+	Tree<Person> *arbol = new Tree<Person>();
+	Node<Person> *creacion;
 
 	cout << "\n---Arboles---" << endl;
 
@@ -24,25 +23,27 @@ void tree()
 		{
 			switch (menu)
 			{
-				case 1:
-					cout << "Nodos creados - - > " << cont << endl;
+			case 1:
+				cout << "Nodos creados - - > " << cont << endl;
+				//Creamos un nodo el cual va a incluir los datos de una persona
+				creacion = new Node<Person>(Person());
 
-					test_node = new Node<Person>(Person());
-					
-					//Llamamos a la función
-					obj.insert_node(n_tree, test_node, nullptr);
-					cont++;
+				//Se manda a llamar la función insert, ubicado en Tree.h
+				arbol->insert(creacion);
 
-					cout << "\nIngresa 0 Para terminar o 1 Para continuar" << endl;
-					cin >> menu;
 
-					//Limpiamos la pantalla
-					system("cls");
+				cont++;
 
-					break;
-				default:
-					cout << "\nIngresa un valor correcto" << endl;
-					return tree();
+				cout << "\nIngresa 0 Para terminar o 1 Para continuar" << endl;
+				cin >> menu;
+
+				//Limpiamos la pantalla
+				system("cls");
+
+				break;
+			default:
+				cout << "\nIngresa un valor correcto" << endl;
+				return tree();
 			}
 		}
 	}
@@ -53,7 +54,7 @@ void tree()
 	cout << "Ingresa \n0-In order \n1-Pre order \n2-Post order \n3-Checar si el arbol esta equilibrado" << endl;
 	cout << "4-Eliminar una hoja/raiz \n5-Rotacion" << endl;
 	cin >> menu;
-	Node<Person> *temp = new Node<Person>();
+	Node<Person> *temp = nullptr;
 	//Limpiamos la pantalla
 	system("cls");
 	switch (menu)
@@ -62,7 +63,7 @@ void tree()
 			cout << "\n--- > In Order <---" << endl;
 			while (menu == 0)
 			{
-				obj.in_order(n_tree);
+				arbol->in_order_tree();
 				menu++;
 			}
 			break;
@@ -71,7 +72,7 @@ void tree()
 			cout << "\n--- > Pre Order <---" << endl;
 			while (menu == 1)
 			{
-				obj.pre_order(n_tree);
+				arbol->pre_order_tree();
 				menu++;
 			}
 			break;
@@ -80,37 +81,28 @@ void tree()
 			cout << "\n--- > Post Order <---" << endl;
 			while (menu == 2)
 			{
-				obj.post_order(n_tree);
+				arbol->post_order_tree();
 				menu++;
 			}
 			break;
 
 		case 3:
 			cout << "\n--- > Arbol equilibrado <---" << endl;
-			obj.check(n_tree);
+			arbol->check_tree();
 			break;
 
 		case 4:
 			cout << "\n--- > Eliminar hoja/raiz <---" << endl;
 
 			cout << "Ingresa los datos siguientes" << endl;
-			cin >> *temp;
-			obj.eliminate(n_tree, temp);
-			obj.in_order(n_tree);
+			temp = new Node<Person>(Person());
+			arbol->eliminate_in_tree(temp);
+			arbol->in_order_tree();
 			break;
 
 		case 5:
 			cout << "\n--- > Rotacion <---" << endl;
-			cout << "Ingresa \n0-Rotar derecha \n1-Rotar izquierda" << endl;
-			cin >> menu;
-			if (menu == 0)
-			{
-				obj.rotate_right(n_tree);
-			}
-			else if (menu == 1)
-			{
-				obj.rotate_left(n_tree);
-			}
+			
 			break;
 
 		default:
