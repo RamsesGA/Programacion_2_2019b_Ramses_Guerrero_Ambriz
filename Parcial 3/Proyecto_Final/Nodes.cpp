@@ -3,16 +3,16 @@
 
 //Función para ...
 template<class T>
-void Nodes<T>::PreordenLeft()
+void Nodos<T>::pre_orden_izq()
 {
-	if (Left != nullptr)
+	if (Izquierda != nullptr)
 	{
-		cout << Left->Dato << endl;
-		Left->PreordenLeft();
-		if (Left->Rigth != nullptr)
+		cout << Izquierda->Dato << endl;
+		Izquierda->pre_orden_izq();
+		if (Izquierda->Derecha != nullptr)
 		{
-			cout << Left->Rigth->Dato << endl;
-			Left->Rigth->PreordenLeft();
+			cout << Izquierda->Derecha->Dato << endl;
+			Izquierda->Derecha->pre_orden_izq();
 		}
 	}
 }
@@ -20,16 +20,16 @@ void Nodes<T>::PreordenLeft()
 
 //Función para ...
 template<class T>
-void Nodes<T>::PreordenRigth()
+void Nodos<T>::pre_orden_dere()
 {
-	if (Rigth != nullptr)
+	if (Derecha != nullptr)
 	{
-		cout << Rigth->Dato << endl;
-		Rigth->PreordenLeft();
-		if (Rigth->Rigth != nullptr)
+		cout << Derecha->Dato << endl;
+		Derecha->pre_orden_izq();
+		if (Derecha->Derecha != nullptr)
 		{
-			cout << Rigth->Rigth->Dato << endl;
-			Rigth->Rigth->PreordenLeft();
+			cout << Derecha->Derecha->Dato << endl;
+			Derecha->Derecha->pre_orden_izq();
 		}
 	}
 
@@ -38,31 +38,31 @@ void Nodes<T>::PreordenRigth()
 
 //Función imprimir en I_O
 template<class T>
-void Nodes<T>::Inorden()
+void Nodos<T>::in_orden()
 {
-	if (Left != nullptr)
+	if (Izquierda != nullptr)
 	{
-		Left->Inorden();
+		Izquierda->in_orden();
 	}
 	cout << Dato << endl;
-	if (Rigth != nullptr)
+	if (Derecha != nullptr)
 	{
-		Rigth->Inorden();
+		Derecha->in_orden();
 	}
 }
 
 
 //Función imprimir en P_O
 template<class T>
-void Nodes<T>::Postorden()
+void Nodos<T>::post_orden()
 {
-	if (Left != nullptr)
+	if (Izquierda != nullptr)
 	{
-		Left->Postorden();
+		Izquierda->post_orden();
 	}
-	if (Rigth != nullptr)
+	if (Derecha != nullptr)
 	{
-		Rigth->Postorden();
+		Derecha->post_orden();
 	}
 	cout << Dato << endl;
 }
@@ -70,29 +70,29 @@ void Nodes<T>::Postorden()
 
 //Función para poder checar si el árbol está balanceado
 template<class T>
-void Nodes<T>::Balance(int Cont)
+void Nodos<T>::balance(int Cont)
 {
 	Nivel = Cont;
-	if (Left != nullptr)
+	if (Izquierda != nullptr)
 	{
 
 		Cont++;
-		Left->Balance(Cont);
+		Izquierda->balance(Cont);
 		Cont--;
-		balIzq = Left->pesoAct;
+		balIzq = Izquierda->pesoAct;
 		pesoAct = ((Nivel * balDer) + (Nivel * balIzq));
 	}
 
-	if (Rigth != nullptr)
+	if (Derecha != nullptr)
 	{
 		Cont++;
-		Rigth->Balance(Cont);
+		Derecha->balance(Cont);
 		Cont--;
-		balDer = Rigth->pesoAct;
+		balDer = Derecha->pesoAct;
 		pesoAct = ((Nivel * balIzq) + (Nivel * balDer));
 
 	}
-	if (Left == nullptr && Rigth == nullptr)
+	if (Izquierda == nullptr && Derecha == nullptr)
 	{
 		pesoAct = Nivel;
 	}
@@ -102,35 +102,35 @@ void Nodes<T>::Balance(int Cont)
 
 //Función para poder Rotar
 template<class T>
-void Nodes<T>::Rotacion()
+void Nodos<T>::rotacion()
 {
-	if (this->Left != nullptr)
+	if (this->Izquierda != nullptr)
 	{
-		this->Left->Rotacion();
+		this->Izquierda->rotacion();
 	}
-	if (this->Rigth != nullptr)
+	if (this->Derecha != nullptr)
 	{
-		this->Rigth->Rotacion();
+		this->Derecha->rotacion();
 	}
 	if (this->balDer < this->balIzq)
 	{
 
-		Nodes<T>*Temp = this->Left->Rigth;
+		Nodos<T>*Temp = this->Izquierda->Derecha;
 		if (this->Ant->Dato > this->Dato)
 		{
-			this->Rigth->Ant = this->Ant;
-			this->Ant->Rigth = this->Rigth;
-			this->Ant = this->Rigth;
+			this->Derecha->Ant = this->Ant;
+			this->Ant->Derecha = this->Derecha;
+			this->Ant = this->Derecha;
 		}
 		else if (this->Ant->Dato < this->Dato)
 		{
-			this->Left->Ant = this->Ant;
-			this->Ant->Left = this->Left;
-			this->Ant = this->Left;
+			this->Izquierda->Ant = this->Ant;
+			this->Ant->Izquierda = this->Izquierda;
+			this->Ant = this->Izquierda;
 		}
 
-		this->Left->Rigth = this;
-		this->Left = Temp;
+		this->Izquierda->Derecha = this;
+		this->Izquierda = Temp;
 		if (Temp != nullptr)
 		{
 			Temp->Ant = this;
@@ -139,22 +139,22 @@ void Nodes<T>::Rotacion()
 	}
 	if (this->balIzq < this->balDer)
 	{
-		Nodes<T>*Temp = this->Rigth->Left;
+		Nodos<T>*Temp = this->Derecha->Izquierda;
 		if (this->Ant->Dato > this->Dato)
 		{
-			this->Rigth->Ant = this->Ant;
-			this->Ant->Rigth = this->Rigth;
-			this->Ant = this->Rigth;
+			this->Derecha->Ant = this->Ant;
+			this->Ant->Derecha = this->Derecha;
+			this->Ant = this->Derecha;
 		}
 		else if (this->Ant->Dato < this->Dato)
 		{
-			this->Left->Ant = this->Ant;
-			this->Ant->Left = this->Left;
-			this->Ant = this->Left;
+			this->Izquierda->Ant = this->Ant;
+			this->Ant->Izquierda = this->Izquierda;
+			this->Ant = this->Izquierda;
 		}
 
-		this->Rigth->Left = this;
-		this->Rigth = Temp;
+		this->Derecha->Izquierda = this;
+		this->Derecha = Temp;
 		if (Temp != nullptr)
 		{
 			Temp->Ant = this;
@@ -166,31 +166,31 @@ void Nodes<T>::Rotacion()
 
 //Función para poder ingresar un nodo al árbol
 template<class T>
-int Nodes<T>::Push(Nodes<T> * U, Nodes<T> * Ante)
+int Nodos<T>::ingresar(Nodos<T> * U, Nodos<T> * Ante)
 {
 	if (*U > *this)
 	{
-		if (Rigth == nullptr)
+		if (Derecha == nullptr)
 		{
-			Rigth = U;
-			Rigth->Ant = Ante;
+			Derecha = U;
+			Derecha->Ant = Ante;
 		}
 		else
 		{
-			Rigth->Push(U, Rigth);
+			Derecha->ingresar(U, Derecha);
 		}
 		return 0;
 	}
 	if (*U < *this)
 	{
-		if (Left == nullptr)
+		if (Izquierda == nullptr)
 		{
-			Left = U;
-			Left->Ant = Ante;
+			Izquierda = U;
+			Izquierda->Ant = Ante;
 		}
 		else
 		{
-			Left->Push(U, Left);
+			Izquierda->ingresar(U, Izquierda);
 		}
 		return 0;
 	}
@@ -200,19 +200,19 @@ int Nodes<T>::Push(Nodes<T> * U, Nodes<T> * Ante)
 
 //Función para eliminar un nodo especifico
 template<class T>
-int Nodes<T>::Pull(Nodes<T> * U, Nodes<T> * Temp)
+int Nodos<T>::eliminar(Nodos<T> * U, Nodos<T> * Temp)
 {
 	if (U == Temp)
 	{
-		if (Temp->Left == nullptr && Temp->Rigth == nullptr)
+		if (Temp->Izquierda == nullptr && Temp->Derecha == nullptr)
 		{
 			if (Temp->Ant->Dato < Temp->Dato)
 			{
-				Temp->Ant->Rigth = nullptr;
+				Temp->Ant->Derecha = nullptr;
 			}
 			else if (Temp->Ant->Dato > Temp->Dato)
 			{
-				Temp->Ant->Left = nullptr;
+				Temp->Ant->Izquierda = nullptr;
 			}
 			Temp->Ant = nullptr;
 			delete Temp;
@@ -220,57 +220,57 @@ int Nodes<T>::Pull(Nodes<T> * U, Nodes<T> * Temp)
 		}
 		else
 		{
-			if (Temp->Left != nullptr && Temp->Rigth == nullptr)
+			if (Temp->Izquierda != nullptr && Temp->Derecha == nullptr)
 			{
 				if (Temp->Ant->Dato < Temp->Dato)
 				{
-					Temp->Ant->Rigth = Temp->Left;
-					Temp->Left->Ant = Temp->Ant;
+					Temp->Ant->Derecha = Temp->Izquierda;
+					Temp->Izquierda->Ant = Temp->Ant;
 				}
 				else if (Temp->Ant->Dato > Temp->Dato)
 				{
-					Temp->Ant->Left = Temp->Left;
-					Temp->Left->Ant = Temp->Ant;
+					Temp->Ant->Izquierda = Temp->Izquierda;
+					Temp->Izquierda->Ant = Temp->Ant;
 				}
-				Temp->Left = nullptr;
+				Temp->Izquierda = nullptr;
 				delete Temp;
 				return 0;
 			}
-			if (Temp->Left == nullptr && Temp->Rigth != nullptr)
+			if (Temp->Izquierda == nullptr && Temp->Derecha != nullptr)
 			{
 				if (Temp->Ant->Dato < Temp->Dato)
 				{
-					Temp->Ant->Rigth = Temp->Rigth;
-					Temp->Rigth->Ant = Temp->Ant;
+					Temp->Ant->Derecha = Temp->Derecha;
+					Temp->Derecha->Ant = Temp->Ant;
 				}
 				else if (Temp->Ant->Dato > Temp->Dato)
 				{
-					Temp->Ant->Left = Temp->Rigth;
-					Temp->Rigth->Ant = Temp->Ant;
+					Temp->Ant->Izquierda = Temp->Derecha;
+					Temp->Derecha->Ant = Temp->Ant;
 				}
-				Temp->Rigth = nullptr;
+				Temp->Derecha = nullptr;
 				delete Temp;
 				return 0;
 			}
 
-			if (Temp->Left != nullptr && Temp->Rigth != nullptr)
+			if (Temp->Izquierda != nullptr && Temp->Derecha != nullptr)
 			{
-				Nodes<T> * Te = new Nodes<T>();
-				Te = &Temp->Rigth->Desplazar(Temp);
+				Nodos<T> * Te = new Nodos<T>();
+				Te = &Temp->Derecha->desplazar(Temp);
 				return 0;
 			}
 		}
 	}
 	if (*U > *Temp)
 	{
-		Temp = Left;
-		Left->Pull(U, Temp);
+		Temp = Izquierda;
+		Izquierda->eliminar(U, Temp);
 		return 0;
 	}
 	if (*U < *Temp)
 	{
-		Temp = Rigth;
-		Rigth->Pull(U, Temp);
+		Temp = Derecha;
+		Derecha->eliminar(U, Temp);
 		return 0;
 	}
 
@@ -280,50 +280,24 @@ int Nodes<T>::Pull(Nodes<T> * U, Nodes<T> * Temp)
 
 //Sobrecarga del operador
 template<class T>
-bool Nodes<T>::operator < (Nodes & U)
+bool Nodos<T>::operator < (Nodos & U)
 {
 	return U.Dato < Dato;
-
-	/*if (U.apellido != apellido)
-	{
-		return U.apellido < apellido;
-	}
-	else if (U.nombre != nombre)
-	{
-		return U.nombre < nombre;
-	}
-	else if (U.edad != edad)
-	{
-		return U.edad < edad;
-	}*/
 }
 
 
 //Sobrecarga del operador 
 template<class T>
-bool Nodes<T>::operator > (Nodes & U)
+bool Nodos<T>::operator > (Nodos & U)
 {
 	return U.Dato > Dato;
-
-	/*if (U.apellido != apellido)
-	{
-		return U.apellido > apellido;
-	}
-	else if (U.nombre != nombre)
-	{
-		return U.nombre > nombre;
-	}
-	else if (U.edad != edad)
-	{
-		return U.edad > edad;
-	}*/
 }
 
 
 //Sobrecarga del operador
 template<class T>
 //revisar si el nodo que ingresamos es igual al nodo actual
-bool Nodes<T>::operator == (Nodes & U)
+bool Nodos<T>::operator == (Nodos & U)
 {
 	return Dato == U.Dato;
 }
@@ -331,18 +305,18 @@ bool Nodes<T>::operator == (Nodes & U)
 
 //Función para un intercambio de valores de nodos cuando sus punteros L and R tienen dos datos
 template<class T>
-Nodes<T> Nodes<T>::Desplazar(Nodes  * Temp)
+Nodos<T> Nodos<T>::desplazar(Nodos  * Temp)
 {
-	if (this->Left != nullptr)
+	if (this->Izquierda != nullptr)
 	{
-		Left->Desplazar(Temp);
+		Izquierda->desplazar(Temp);
 	}
 	else
 	{
 		Temp->Dato = this->Dato;
 		this->Ant = nullptr;
-		this->Rigth = nullptr;
-		this->Left = nullptr;
+		this->Derecha = nullptr;
+		this->Izquierda = nullptr;
 		delete this;
 		return *Temp;
 	}
@@ -351,38 +325,38 @@ Nodes<T> Nodes<T>::Desplazar(Nodes  * Temp)
 
 //Constructor para definir el valor de los punteros cuando el nodo se crea de manera automatica
 template<class T>
-Nodes<T>::Nodes(T D) : Dato(D)
+Nodos<T>::Nodos(T D) : Dato(D)
 {
-	Left = nullptr;
-	Rigth = nullptr;
+	Izquierda = nullptr;
+	Derecha = nullptr;
 }
 
 
 //Constructor para definir el valor de los punteros del nuevo nodo
 template<class T>
-Nodes<T>::Nodes()
+Nodos<T>::Nodos()
 {
-	Left = nullptr;
-	Rigth = nullptr;
+	Izquierda = nullptr;
+	Derecha = nullptr;
 }
 
 
 //Destructor
 template<class T>
-Nodes<T>::~Nodes()
+Nodos<T>::~Nodos()
 {
-	if (Left != nullptr)
+	if (Izquierda != nullptr)
 	{
-		delete Left;
+		delete Izquierda;
 	}
-	if (Rigth != nullptr)
+	if (Derecha != nullptr)
 	{
-		delete Rigth;
+		delete Derecha;
 	}
 }
 
 
 
 //IMPORTANTE
-template class Nodes<Persona>;
-template class Nodes<int>;
+template class Nodos<Persona>;
+template class Nodos<int>;

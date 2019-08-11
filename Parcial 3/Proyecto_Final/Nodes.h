@@ -8,16 +8,16 @@ using std::cin;
 using std::endl;
 
 template<class T>
-class Nodes
+class Nodos
 {
 	public:
 	
 		//Mienbros
 		T Dato;
 	
-		Nodes<T> *Rigth;
-		Nodes<T> *Left;
-		Nodes<T> *Ant = nullptr;
+		Nodos<T> *Derecha;
+		Nodos<T> *Izquierda;
+		Nodos<T> *Ant = nullptr;
 	
 		int Nivel = 0;
 		int balIzq = 0;
@@ -25,29 +25,29 @@ class Nodes
 		int pesoAct = 0;
 	
 		//Metodos
-		void PreordenLeft();
-		void PreordenRigth();
-		void Inorden();
-		void Postorden();
-		void Balance(int);
-		void Rotacion();
+		void pre_orden_izq();
+		void pre_orden_dere();
+		void in_orden();
+		void post_orden();
+		void balance(int);
+		void rotacion();
 	
-		int Push(Nodes<T>*, Nodes<T>*);
-		int Pull(Nodes<T>*, Nodes<T>*);
+		int ingresar(Nodos<T>*, Nodos<T>*);
+		int eliminar(Nodos<T>*, Nodos<T>*);
 	
 		//Sobrecarga de operadores 
-		bool operator < (Nodes<T>&);
-		bool operator > (Nodes<T>&);
-		bool operator == (Nodes<T>&);
+		bool operator < (Nodos<T>&);
+		bool operator > (Nodos<T>&);
+		bool operator == (Nodos<T>&);
 	
 	
-		Nodes Desplazar(Nodes<T>*);
+		Nodos desplazar(Nodos<T>*);
 	
 		//Constructores
-		Nodes(T);
-		Nodes();
+		Nodos(T);
+		Nodos();
 	
 		//Destructor
-		~Nodes();
+		~Nodos();
 };
 

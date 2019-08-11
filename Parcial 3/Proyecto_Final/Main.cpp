@@ -50,17 +50,17 @@ int main()
 int arbol_avl()
 {
 	char eleccion;
-	Arbol_AVL<Persona>*node = new Arbol_AVL<Persona>();
-	unsigned int force_exit = 0;
+	Arbol_AVL<Persona>*nodo_nuevo = new Arbol_AVL<Persona>();
+	unsigned int forzar_salida = 0;
 
-	while (force_exit == 0)
+	while (forzar_salida == 0)
 	{
 		system("cls");
 		cout << "0 -- > Salir\n\n";
 		cout << "1 -- > Agregar un elemento\n\n";
-		cout << "2 -- > Mostrar el arbol Inorden\n\n";
-		cout << "3 -- > Mostrar el arbol Preorden\n\n";
-		cout << "4 -- > Mostrar el arbol Postorden\n\n";
+		cout << "2 -- > Mostrar el arbol in_orden\n\n";
+		cout << "3 -- > Mostrar el arbol pre_orden\n\n";
+		cout << "4 -- > Mostrar el arbol post_orden\n\n";
 		cout << "5 -- > Revisar si el arbol esta balanceado\n\n";
 		cout << "6 -- > Eliminar un nodo\n\n";
 		cout << "7 -- > Rotar el arbol\n\n";
@@ -79,8 +79,8 @@ int arbol_avl()
 				system("cls");
 
 				//User * U = new User(Nombre, Apellido, Edad);
-				Nodes<Persona>*node_temp = new Nodes<Persona>(Persona());
-				node->Push(node_temp);
+				Nodos<Persona>*nodo_temp = new Nodos<Persona>(Persona());
+				nodo_nuevo->ingresar(nodo_temp);
 				break;
 			}
 
@@ -89,8 +89,8 @@ int arbol_avl()
 				//Limpiamos la pantalla
 				system("cls");
 
-				node->Inorden();
-				force_exit++;
+				nodo_nuevo->in_orden();
+				forzar_salida++;
 				break;
 
 			//mostrar arbol en preorden
@@ -98,8 +98,8 @@ int arbol_avl()
 				//Limpiamos la pantalla
 				system("cls");
 
-				node->Preorden();
-				force_exit++;
+				nodo_nuevo->pre_orden();
+				forzar_salida++;
 				break;
 
 			//mostrar arbol en postorden
@@ -107,8 +107,8 @@ int arbol_avl()
 				//Limpiamos la pantalla
 				system("cls");
 
-				node->Postorden();
-				force_exit++;
+				nodo_nuevo->post_orden();
+				forzar_salida++;
 				break;
 
 			//Mostrar si el arbol esta balanceado
@@ -116,8 +116,8 @@ int arbol_avl()
 				//Limpiamos la pantalla
 				system("cls");
 
-				node->Balance();
-				force_exit++;
+				nodo_nuevo->balance();
+				forzar_salida++;
 				break;
 
 			//eliminar el nodo que el usuario ingrese
@@ -126,18 +126,18 @@ int arbol_avl()
 				//Limpiamos la pantalla
 				system("cls");
 
-				//Creamos un nuevo nodo el cual node_temp va a tener el nombre, apellido y edad
-				Nodes<Persona>*node_temp = new Nodes<Persona>(Persona());
+				//Creamos un nuevo nodo el cual nodo_temp va a tener el nombre, apellido y edad
+				Nodos<Persona>*nodo_temp = new Nodos<Persona>(Persona());
 
-				//Finalmente node va 
-				node->Pull(node_temp);
-				force_exit++;
+				//Finalmente nodo_nuevo va 
+				nodo_nuevo->eliminar(nodo_temp);
+				forzar_salida++;
 				break;
 			}
 
 			case '7':
-				node->Rotacion();
-				force_exit++;
+				nodo_nuevo->rotacion();
+				forzar_salida++;
 				break;
 
 			default:

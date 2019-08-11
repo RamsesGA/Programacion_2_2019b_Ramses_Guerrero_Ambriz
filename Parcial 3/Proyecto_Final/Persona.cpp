@@ -48,7 +48,7 @@ bool Persona::operator==(Persona & P)
 //Sobrecarga del operador out
 std::ostream & operator<<(std::ostream & os, Persona & P)
 {
-	os << "Apellido: \n" << P.apellido << " Nombre: \n" << P.nombre << " Edad: \n" << P.edad << std::endl;
+	os << "\nApellido: \n" << P.apellido << " \nNombre: \n" << P.nombre << " \nEdad: \n" << P.edad << std::endl;
 	return os;
 }
 
