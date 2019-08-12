@@ -94,11 +94,7 @@ void Arbol_AVL<T>::pre_orden()
 {
 	if (Raiz != nullptr)
 	{
-		/*cout << "Apellido: " << Raiz->apellido << endl;
-		cout << "Nombre: " << Raiz->nombre << endl;
-		cout << "Edad: " << Raiz->edad << endl;*/
-		Raiz->pre_orden_izq();
-		Raiz->pre_orden_dere();
+		Raiz->pre_orden();
 	}
 	else
 	{

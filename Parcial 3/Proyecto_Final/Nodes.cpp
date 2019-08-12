@@ -51,7 +51,6 @@ void Nodos<T>::in_orden()
 	}
 }
 
-
 //Función imprimir en P_O
 template<class T>
 void Nodos<T>::post_orden()
@@ -65,6 +64,24 @@ void Nodos<T>::post_orden()
 		Derecha->post_orden();
 	}
 	cout << Dato << endl;
+}
+
+//Función para imprimir
+template<class T>
+void Nodos<T>::pre_orden()
+{
+	//Imprimimos los datos
+	cout << Dato << endl;
+	//Usamos recursividad para recorrer primero el lado izq
+	if (Izquierda != nullptr)
+	{
+		Izquierda->pre_orden();
+	}
+	//Finalmente pasamos al lado derecho
+	if (Derecha != nullptr)
+	{
+		Derecha->pre_orden();
+	}
 }
 
 

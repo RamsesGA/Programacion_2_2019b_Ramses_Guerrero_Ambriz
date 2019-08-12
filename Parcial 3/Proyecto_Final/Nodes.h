@@ -28,6 +28,7 @@ class Nodos
 		void pre_orden_izq();
 		void pre_orden_dere();
 		void in_orden();
+		void pre_orden();
 		void post_orden();
 		void balance(int);
 		void rotacion();
