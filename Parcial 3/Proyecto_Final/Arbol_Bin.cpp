@@ -10,9 +10,17 @@ Arbol_Bin<T>::Arbol_Bin()
 
 //Destructor
 template<class T>
-Arbol_Bin<T>::~Arbol_Bin(){}
+Arbol_Bin<T>::~Arbol_Bin()
+{
+	//Se checa si la raiz es nula.
+	if (Raiz != nullptr)
+	{
+		//De serlo, se elimina.
+		delete Raiz;
+	}
+}
 
-//Constructor...
+//Constructor para definir la raíz
 template<class T>
 Arbol_Bin<T>::Arbol_Bin(Nodos<T>* _nodo)
 {
@@ -21,7 +29,7 @@ Arbol_Bin<T>::Arbol_Bin(Nodos<T>* _nodo)
 
 //Función para poder ingresar un nodo al árbol
 template<class T>
-int Arbol_Bin<T>::ingresar(Nodos<T>* _nodo)
+int Arbol_Bin<T>::ingresar(Nodos<T>*& _nodo)
 {
 	//Primero checamos si la raíz es nula
 	if (Raiz == nullptr)
@@ -83,7 +91,7 @@ void Arbol_Bin<T>::eliminar(Nodos<T>* _nodo)
 	else
 	{
 		//Creamos un puntero temporal que servirá como recipiente
-		Nodos<T> * Temp = new Nodos<T>();
+		Nodos<T> * Temp;// = new Nodos<T>();
 
 		//Checamos, si los datos ingresados son mayores a la raíz
 		if (*_nodo > *Raiz)
@@ -108,36 +116,45 @@ void Arbol_Bin<T>::eliminar(Nodos<T>* _nodo)
 template<class T>
 void Arbol_Bin<T>::in_orden()
 {
+	//Se checa si la raiz es nula
 	if (Raiz != nullptr)
 	{
+		//De ser asi, se entra en la funcion.
 		Raiz->in_orden();
 	}
 	else
 	{
+		//Caso contario, manda un mensaje indicando que el arbol esta vacio.
 		cout << "Arbol_AVL vacio" << endl;
 	}
 }
 template<class T>
 void Arbol_Bin<T>::pre_orden()
 {
+	//Se checa si la raiz es nula
 	if (Raiz != nullptr)
 	{
+		//De ser asi, se entra en la funcion.
 		Raiz->pre_orden();
 	}
 	else
 	{
+		//Caso contario, manda un mensaje indicando que el arbol esta vacio.
 		cout << "Arbol_AVL vacio" << endl;
 	}
 }
 template<class T>
 void Arbol_Bin<T>::post_orden()
 {
+	//Se checa si la raiz es nula
 	if (Raiz != nullptr)
 	{
+		//De ser asi, se entra en la funcion.
 		Raiz->post_orden();
 	}
 	else
 	{
+		//Caso contario, manda un mensaje indicando que el arbol esta vacio.
 		cout << "Arbol_AVL vacio" << endl;
 	}
 }

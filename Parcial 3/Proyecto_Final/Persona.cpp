@@ -63,9 +63,14 @@ Persona::Persona(string N, string A, int E)
 //Constructor para la creación de un nuevo nodo
 Persona::Persona()
 {
-	cout << "Ingresa un apellido: \n"; cin >> apellido;
-	cout << "Ingresa un nombre: \n"; cin >> nombre;
-	cout << "Ingresa una edad: \n"; cin >> edad;
+	//To do: tenemos que hacer que el usuario pueda ingresar datos con espacios
+	cout << "Ingresa un apellido: \n"; 
+	cin >> apellido;
+	cout << "Ingresa un nombre: \n";
+	cin >> nombre;
+	cout << "Ingresa una edad: \n"; 
+	//to do: obligar al usuario a ingresar un número
+	cin >> edad;
 }
 
 //Destructor

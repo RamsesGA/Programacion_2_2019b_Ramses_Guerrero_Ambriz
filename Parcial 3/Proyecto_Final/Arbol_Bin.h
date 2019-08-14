@@ -1,17 +1,17 @@
 #pragma once
 #include "Nodes.h"
+#include "Arboles.h"
 #include <string> 
 #include <iostream>
 
 template<class T>
-class Arbol_Bin
+class Arbol_Bin : Arboles<T>
 {
-	public:
-	
+	protected:
 		//Miembros
 		Nodos<T>*Raiz = nullptr;
-	
 
+	public:
 		//Metodos
 
 		Arbol_Bin(Nodos<T>*);
@@ -21,7 +21,7 @@ class Arbol_Bin
 		~Arbol_Bin();
 	
 		//Función para ingresar nodos al árbol
-		int ingresar(Nodos<T>*);
+		int ingresar(Nodos<T>*&);
 	
 		//Función para eliminar nodos del árbol
 		void eliminar(Nodos<T>*);

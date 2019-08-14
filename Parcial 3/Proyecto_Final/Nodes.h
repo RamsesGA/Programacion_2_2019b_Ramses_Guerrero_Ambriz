@@ -2,6 +2,11 @@
 #include <string> 
 #include <iostream>
 
+template<class T>
+class Arbol_AVL;
+template<class T>
+class Arbol_Bin;
+
 using std::string;
 using std::cout;
 using std::cin;
@@ -10,29 +15,27 @@ using std::endl;
 template<class T>
 class Nodos
 {
-	public:
-	
-		//Mienbros
+	protected:
+		//Miembros
 		T Dato;
-	
+
 		Nodos<T> *Derecha;
 		Nodos<T> *Izquierda;
 		Nodos<T> *Ant = nullptr;
-	
+
 		int Nivel = 0;
-		int balIzq = 0;
-		int balDer = 0;
-		int pesoAct = 0;
-	
+		int contador = 0;
+
+	public:
 		//Metodos
-		void pre_orden_izq();
-		void pre_orden_dere();
+		T get();
+
 		void in_orden();
 		void pre_orden();
 		void post_orden();
-		void balance(int);
 		void rotacion();
-	
+
+		int balanceado(int);
 		int ingresar(Nodos<T>*, Nodos<T>*);
 		int eliminar(Nodos<T>*, Nodos<T>*);
 	
@@ -40,8 +43,7 @@ class Nodos
 		bool operator < (Nodos<T>&);
 		bool operator > (Nodos<T>&);
 		bool operator == (Nodos<T>&);
-	
-	
+		
 		Nodos desplazar(Nodos<T>*);
 	
 		//Constructores
@@ -50,5 +52,8 @@ class Nodos
 	
 		//Destructor
 		~Nodos();
+
+		friend class Arbol_AVL<T>;
+		friend class Arbol_Bin<T>;
 };
 

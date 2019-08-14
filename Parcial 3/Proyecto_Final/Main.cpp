@@ -26,7 +26,7 @@ int main()
 		//Caso para el arbol binario
 		case 1:
 			system("cls");
-
+			arbol_bin();
 			return main();
 
 		//Caso para el arbol binario AVL
@@ -34,7 +34,6 @@ int main()
 			system("cls");
 			arbol_avl();
 			return main();
-
 
 		default:
 			system("cls");
@@ -51,7 +50,7 @@ int main()
 int arbol_avl()
 {
 	char eleccion;
-	Arbol_AVL<Persona>*arbol = new Arbol_AVL<Persona>();
+	Arbol_AVL<Persona> arbol;
 	unsigned int forzar_salida = 0;
 
 	while (forzar_salida == 0)
@@ -62,9 +61,6 @@ int arbol_avl()
 		cout << "2 -- > Mostrar el arbol in_orden\n\n";
 		cout << "3 -- > Mostrar el arbol pre_orden\n\n";
 		cout << "4 -- > Mostrar el arbol post_orden\n\n";
-		cout << "5 -- > Revisar si el arbol esta balanceado\n\n";
-		cout << "6 -- > Eliminar un nodo\n\n";
-		cout << "7 -- > Rotar el arbol\n\n";
 		cin >> eleccion;
 
 		switch (eleccion)
@@ -81,7 +77,7 @@ int arbol_avl()
 
 				//User * U = new User(Nombre, Apellido, Edad);
 				Nodos<Persona>*nodo_temp = new Nodos<Persona>(Persona());
-				arbol->ingresar(nodo_temp);
+				arbol.ingresar(nodo_temp);
 				break;
 			}
 
@@ -90,7 +86,7 @@ int arbol_avl()
 				//Limpiamos la pantalla
 				system("cls");
 
-				arbol->in_orden();
+				arbol.in_orden();
 				forzar_salida++;
 				break;
 
@@ -99,7 +95,7 @@ int arbol_avl()
 				//Limpiamos la pantalla
 				system("cls");
 
-				arbol->pre_orden();
+				arbol.pre_orden();
 				forzar_salida++;
 				break;
 
@@ -108,21 +104,13 @@ int arbol_avl()
 				//Limpiamos la pantalla
 				system("cls");
 
-				arbol->post_orden();
+				arbol.post_orden();
 				forzar_salida++;
 				break;
 
-			//Mostrar si el arbol esta balanceado
-			case '5':
-				//Limpiamos la pantalla
-				system("cls");
-
-				arbol->balance();
-				forzar_salida++;
-				break;
-
+			
 			//eliminar el nodo que el usuario ingrese
-			case '6':
+			case '5':
 			{
 				//Limpiamos la pantalla
 				system("cls");
@@ -131,15 +119,10 @@ int arbol_avl()
 				Nodos<Persona>*nodo_temp = new Nodos<Persona>(Persona());
 
 				//Finalmente arbol va 
-				arbol->eliminar(nodo_temp);
+				arbol.eliminar(nodo_temp);
 				forzar_salida++;
 				break;
 			}
-
-			case '7':
-				arbol->rotacion();
-				forzar_salida++;
-				break;
 
 			default:
 				system("cls");
@@ -156,7 +139,7 @@ int arbol_avl()
 int arbol_bin()
 {
 	char eleccion;
-	Arbol_Bin<Persona>*arbol = new Arbol_Bin<Persona>();
+	Arbol_Bin<Persona> arbol;
 	unsigned int forzar_salida = 0;
 
 	while (forzar_salida == 0)
@@ -184,7 +167,7 @@ int arbol_bin()
 
 				//User * U = new User(Nombre, Apellido, Edad);
 				Nodos<Persona>*nodo_temp = new Nodos<Persona>(Persona());
-				arbol->ingresar(nodo_temp);
+				arbol.ingresar(nodo_temp);
 				break;
 			}
 
@@ -198,7 +181,7 @@ int arbol_bin()
 				Nodos<Persona>*nodo_temp = new Nodos<Persona>(Persona());
 
 				//Finalmente arbol va 
-				arbol->eliminar(nodo_temp);
+				arbol.eliminar(nodo_temp);
 				forzar_salida++;
 				break;
 			}
@@ -208,7 +191,7 @@ int arbol_bin()
 				//Limpiamos la pantalla
 				system("cls");
 
-				arbol->in_orden();
+				arbol.in_orden();
 				forzar_salida++;
 				break;
 
@@ -217,7 +200,7 @@ int arbol_bin()
 				//Limpiamos la pantalla
 				system("cls");
 
-				arbol->pre_orden();
+				arbol.pre_orden();
 				forzar_salida++;
 				break;
 
@@ -226,7 +209,7 @@ int arbol_bin()
 				//Limpiamos la pantalla
 				system("cls");
 
-				arbol->post_orden();
+				arbol.post_orden();
 				forzar_salida++;
 				break;
 

@@ -8,7 +8,7 @@ Arbol_AVL<T>::Arbol_AVL()
 	Raiz = nullptr;
 }
 
-//Constructor...
+//Constructor
 template<class T>
 Arbol_AVL<T>::Arbol_AVL(Nodos<T>* U)
 {
@@ -19,15 +19,17 @@ Arbol_AVL<T>::Arbol_AVL(Nodos<T>* U)
 template<class T>
 Arbol_AVL<T>::~Arbol_AVL()
 {
+	//Se checa si la raiz es nula.
 	if (Raiz != nullptr)
 	{
+		//De serlo, se elimina.
 		delete Raiz;
 	}
 }
 
 //Función para poder ingresar un nodo al árbol
 template<class T>
-int Arbol_AVL<T>::ingresar(Nodos<T> * U)
+int Arbol_AVL<T>::ingresar(Nodos<T> * &U)
 {
 	//Primero checamos si la raíz es nula
 	if (Raiz == nullptr)
@@ -73,6 +75,7 @@ int Arbol_AVL<T>::ingresar(Nodos<T> * U)
 			}
 		}
 	}
+	balancear();
 	return 0;
 }
 
@@ -80,72 +83,118 @@ int Arbol_AVL<T>::ingresar(Nodos<T> * U)
 template<class T>
 void Arbol_AVL<T>::in_orden()
 {
+	//Se checa si la raiz es nula
 	if (Raiz != nullptr)
 	{
+		//De ser asi, se entra en la funcion.
 		Raiz->in_orden();
 	}
 	else
 	{
+		//Caso contario, manda un mensaje indicando que el arbol esta vacio.
 		cout << "Arbol_AVL vacio" << endl;
 	}
 }
 template<class T>
 void Arbol_AVL<T>::pre_orden()
 {
+	//Se checa si la raiz es nula
 	if (Raiz != nullptr)
 	{
+		//De ser asi, se entra en la funcion.
 		Raiz->pre_orden();
 	}
 	else
 	{
+		//Caso contario, manda un mensaje indicando que el arbol esta vacio.
 		cout << "Arbol_AVL vacio" << endl;
 	}
 }
 template<class T>
 void Arbol_AVL<T>::post_orden()
 {
+	//Se checa si la raiz es nula
 	if (Raiz != nullptr)
 	{
+		//De ser asi, se entra en la funcion.
 		Raiz->post_orden();
 	}
 	else
 	{
+		//Caso contario, manda un mensaje indicando que el arbol esta vacio.
 		cout << "Arbol_AVL vacio" << endl;
 	}
 }
 
-//Función para...
+//Funcion para llamar la rotacion
 template<class T>
-void Arbol_AVL<T>::balance()
+void Arbol_AVL<T>::balancear()
 {
+	rotacion();
+}
+
+//Función de rotación
+template<class T>
+void Arbol_AVL<T>::rotacion()
+{
+	Raiz->balanceado(Raiz->contador);
+	//Se checa si el puntero izquierdo no esta vacio.
 	if (Raiz->Izquierda != nullptr)
 	{
-		Cont++;
-		Raiz->Izquierda->balance(Cont);
-		if (Raiz->Izquierda->balDer != Raiz->Izquierda->balIzq)
-		{
-			cout << "Lado izquierdo desbalanceado" << endl;
-		}
-		Raiz->balIzq = Raiz->Izquierda->balDer + Raiz->Izquierda->balIzq;
+		//De no estar vacio se avanza a la izquierda.
+		Raiz->Izquierda->rotacion();
+		
 	}
+
+	//Se checa si el puntero derecho no esta vacio.
 	if (Raiz->Derecha != nullptr)
 	{
-		Cont = 0;
-		Cont++;
-		Raiz->Derecha->balance(Cont);
-		if (Raiz->Derecha->balDer != Raiz->Derecha->balIzq)
+		//De no estar vacio se avanza a la derecho.
+		Raiz->Derecha->rotacion();
+		
+	}
+
+	//Condición para rotar a la izq en caso de que el nivel de la raíz sea mayor igual a 2
+	if (Raiz->Nivel >= 2)
+	{
+		//se rota a la derecha
+		//el nodo derecho se vuelve raiz
+		Nodos<T>*Temp = Raiz->Derecha->Izquierda;
+
+		//En caso de que nuestro temp no este vacio
+		if (Temp != nullptr)
 		{
-			cout << "Lado derecho no balanceado" << endl;
+			//Re apuntamos el nodo temp
+			Temp->Ant = Raiz;
 		}
-		Raiz->balDer = Raiz->Derecha->balDer + Raiz->Derecha->balIzq;
+
+		//Movemos punteros para rotar
+		Raiz->Ant = Raiz->Derecha;
+		Raiz->Derecha->Izquierda = Raiz;
+		Raiz->Derecha = Temp;
+		//se define una nueva raiz
+		Raiz = Raiz->Ant;
 	}
-	if (Raiz->balDer == Raiz->balIzq)
+
+	//Condición para rotar a la derecha en caso de que el nivel de la raíz sea mayor igual a -2
+	if (Raiz->Nivel <= -2)
 	{
-		cout << "Arbol_AVL balanceado" << endl;
-	}
-	else
-	{
-		cout << "Arbol_AVL no balanceado" << endl;
+		//El nodo izquierdo se vulve la raiz
+		Nodos<T>*Temp = Raiz->Izquierda->Derecha;
+
+		//En caso de que nuestro temp no este vacio
+		if (Temp != nullptr)
+		{
+			//Re apuntamos el nodo temp
+			Temp->Ant = Raiz;
+		}
+
+		//Movemos punteros para rotar
+		Raiz->Ant = Raiz->Izquierda;
+		Raiz->Izquierda->Derecha = Raiz;
+		Raiz->Izquierda = Temp;
+		//se define una nueva raiz
+		Raiz = Raiz->Ant;
 	}
 }
 
@@ -162,7 +211,7 @@ void Arbol_AVL<T>::eliminar(Nodos<T>* U)
 	else
 	{
 		//Creamos un puntero temporal que servirá como recipiente
-		Nodos<T> * Temp = new Nodos<T>();
+		Nodos<T> * Temp;// = new Nodos<T>();
 
 		//Checamos, si los datos ingresados son mayores a la raíz
 		if (*U > *Raiz)
@@ -182,51 +231,6 @@ void Arbol_AVL<T>::eliminar(Nodos<T>* U)
 		}
 	}
 }
-
-//Función de rotación
-template<class T>
-void Arbol_AVL<T>::rotacion()
-{
-	balance();
-
-	//se rota a la Derecha
-	if (Raiz->Izquierda != nullptr)
-	{
-		Raiz->Izquierda->rotacion();
-	}
-	if (Raiz->Derecha != nullptr)
-	{
-		Raiz->Derecha->rotacion();
-	}
-	if (Raiz->balDer < Raiz->balIzq)
-	{
-		//El nodo izquierdo se vulve la raiz
-		Nodos<T>*Temp = Raiz->Izquierda->Derecha;
-		if (Temp != nullptr)
-		{
-			Temp->Ant = Raiz;
-		}
-		Raiz->Ant = Raiz->Izquierda;
-		Raiz->Izquierda->Derecha = Raiz;
-		Raiz->Izquierda = Temp;
-		Raiz = Raiz->Ant;
-	}
-	//se rota a la izquierda
-	if (Raiz->balIzq < Raiz->balDer)
-	{
-		//El nodo derecho se vuelve la raiz
-		Nodos<T>*Temp = Raiz->Derecha->Izquierda;
-		if (Temp != nullptr)
-		{
-			Temp->Ant = Raiz;
-		}
-		Raiz->Ant = Raiz->Derecha;
-		Raiz->Derecha->Izquierda = Raiz;
-		Raiz->Derecha = Temp;
-		Raiz = Raiz->Ant;
-	}
-}
-
 
 
 //IMPORTANTE

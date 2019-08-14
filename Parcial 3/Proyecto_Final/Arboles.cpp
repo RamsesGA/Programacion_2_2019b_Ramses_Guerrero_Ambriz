@@ -1,9 +1,17 @@
 #include "Arboles.h"
 
 //Constructor
-Arboles::Arboles(){}
+template<class T>
+Arboles<T>::Arboles(){}
 
 //Destructor
-Arboles::~Arboles(){}
+template<class T>
+Arboles<T>::~Arboles(){}
 
 
+
+
+//IMPORTANTE
+#include "Persona.h"
+template class Arboles<Persona>;
+template class Arboles<int>;
