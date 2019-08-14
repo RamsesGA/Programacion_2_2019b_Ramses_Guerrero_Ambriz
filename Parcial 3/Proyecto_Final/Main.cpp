@@ -120,6 +120,7 @@ int arbol_avl()
 
 				//Finalmente arbol va 
 				arbol.eliminar(nodo_temp);
+				arbol.balancear();
 				forzar_salida++;
 				break;
 			}
